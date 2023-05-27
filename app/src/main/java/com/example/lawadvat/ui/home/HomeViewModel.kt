@@ -1,4 +1,4 @@
-package com.example.lawadvat.ui.appointment
+package com.example.lawadvat.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
