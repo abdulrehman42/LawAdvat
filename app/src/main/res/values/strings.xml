@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LawAdvat</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_messege">Messege</string>
+    <string name="title_setting">Setting</string>
+</resources>

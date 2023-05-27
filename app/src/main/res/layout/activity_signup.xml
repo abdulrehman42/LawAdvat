@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.signup.Signup">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/lawyers" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:fontFamily="serif"
+            android:text="Join Lawadvat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:fontFamily="serif"
+
+            android:text="join our growing community to offer your professional service, connect with your client and get on Lawadvat's trusted platform "/>
+   <androidx.appcompat.widget.AppCompatButton
+       android:id="@+id/signin_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="15dp"
+       android:textColor="@color/white"
+       android:text="Continue with google"
+       android:backgroundTint="#132697"
+       android:padding="10dp"
+       android:background="@drawable/buttonradius"/>
+        <TextView
+            android:id="@+id/later_btn"
+            android:layout_margin="05dp"
+            android:textColor="#CB301B1B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="later"/>
+    </LinearLayout>
+</ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
