@@ -80,5 +80,12 @@ class ForthFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        if (array1!=null)
+        {
+            binding.itemDesc.setText(array1?.get(12).toString())
+            binding.itemExperience.setText(array1?.get(13).toString())
+            binding.itemFee.setText(array1?.get(14).toString())
+        }
     }
 }

@@ -1,14 +1,557 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.become.SeventhFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.become.SeventhFragmen">
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Review your Information"
+                android:layout_marginBottom="10dp"
+                android:textColor="#009688"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Personal Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-</FrameLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Number"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cnic_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="13"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_cnic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CNIC"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    />
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Address Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_country"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pakistan"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_province"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_province"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Province"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/baseline_location_on_24"
+                app:endIconTint="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="office Location or current location"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="License Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_general"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_general"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="General License"
+                    android:clickable="false"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_high"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_high"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="High Court License"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_supreme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_supreme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Supreme Court License"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Experience Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_des"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Describe Your Overview"
+                    android:clickable="false"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_experice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="How many year experience"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_fee"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Set your fee in PKR"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Specification Case Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_first"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highly Specialize in Practical Area"
+                    android:clickable="false"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_second"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Specializes in practical area"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_third"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Specialize in practical area"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_forth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_forth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Specialize in practical area"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Education Information"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_firststudy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_firststudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:hint="LLB from"
+                    android:inputType="text"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_secondstudy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_secondstudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="LLM from"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_thirdstudy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_thirdstudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Bar of Law from"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_forthstudy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="04dp"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_forthstudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="P.H.D from"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="08dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="04dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/white"
+                    android:shadowColor="@color/black"
+                    android:text="Back"
+                    android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_marginStart="04dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#002C28"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

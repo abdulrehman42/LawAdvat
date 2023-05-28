@@ -85,6 +85,13 @@ class ThirdFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        if (array1!=null)
+        {
+            binding.itemGeneral.setText(array1?.get(9).toString())
+            binding.itemHigh.setText(array1?.get(10).toString())
+            binding.itemSupreme.setText(array1?.get(11).toString())
+        }
     }
 }
