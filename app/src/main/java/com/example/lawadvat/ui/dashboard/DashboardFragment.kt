@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -21,6 +22,7 @@ class DashboardFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
         val dashboardViewModel =
                 ViewModelProvider(this).get(DashboardViewModel::class.java)
 

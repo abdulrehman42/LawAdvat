@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -24,6 +25,9 @@ class Setting : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.teal_700);
+
         binding= FragmentSettingBinding.inflate(inflater)
         requireActivity()?.actionBar?.hide()
         viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
@@ -55,7 +59,7 @@ class Setting : Fragment() {
                 fragmentManager?.beginTransaction()
                     ?.replace(R.id.nav_host_fragment_activity_main,FirstFragment())?.addToBackStack(null)
                     ?.commit()
-                Snackbar.make(requireView(),"we working on it",Snackbar.LENGTH_SHORT).show()
+                //Snackbar.make(requireView(),"we working on it",Snackbar.LENGTH_SHORT).show()
             }
             else
             {

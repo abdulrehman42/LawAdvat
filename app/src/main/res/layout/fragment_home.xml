@@ -26,7 +26,7 @@
             >
             <ImageView
                 android:id="@+id/profile"
-                android:layout_margin="15dp"
+                android:layout_margin="20dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/baseline_account_circle_24" />
@@ -35,13 +35,14 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:textSize="16sp"
                 android:layout_marginStart="15dp"
                 android:fontFamily="serif"
                 android:text="name"
                 android:textColor="#000000"
-                android:textStyle="italic|bold" />
+                android:textStyle="italic|bold"
+                tools:ignore="RtlHardcoded" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/search"
                 android:layout_width="match_parent"
@@ -81,15 +82,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            app:iss_auto_cycle="true"
-            app:iss_period="1000"
-            app:iss_delay="1000"
             android:padding="05dp"
-            app:iss_text_align="CENTER"/>
+            android:scaleType="centerInside"
+            app:iss_auto_cycle="true"
+            app:iss_delay="1000"
+            app:iss_period="1000" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView

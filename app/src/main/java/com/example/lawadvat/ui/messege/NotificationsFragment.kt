@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
@@ -22,6 +23,7 @@ class NotificationsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
         val notificationsViewModel =
                 ViewModelProvider(this).get(NotificationsViewModel::class.java)
 

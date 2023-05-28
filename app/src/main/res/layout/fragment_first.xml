@@ -16,6 +16,7 @@
             android:elevation="5dp"
             android:orientation="vertical"
             android:padding="10dp"
+            android:layout_gravity="center"
             tools:ignore="MissingConstraints">
 
             <TextView
@@ -32,13 +33,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:hint="Name"
                     android:inputType="text"
                     tools:ignore="HardcodedText" />
@@ -49,15 +53,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:hint="email"
-                    android:inputType="numberDecimal" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,13 +72,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
-                app:errorEnabled="true">
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_cost"
+                    android:id="@+id/item_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:hint="Number"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,18 +91,20 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cnic_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
-                app:endIconCheckable="true"
-                app:endIconMode="custom"
-                app:endIconTint="@color/black"
-                app:errorEnabled="true">
+                app:counterEnabled="true"
+                app:counterMaxLength="13"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/teal_700"
+                app:boxStrokeColor="@color/teal_700"
+                tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_cnic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:hint="CNIC"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -102,13 +116,13 @@
                 android:padding="10dp">
 
                 <RadioButton
-                    android:id="@+id/each_radio"
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male" />
 
                 <RadioButton
-                    android:id="@+id/weight_radio"
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
@@ -122,28 +136,27 @@
                 android:layout_gravity="center"
                 android:padding="08dp"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/back_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginEnd="04dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/buttonradius"
                     android:backgroundTint="@color/white"
+                    android:shadowColor="@color/black"
                     android:text="Back"
-                    android:textColor="@color/black"
-                    tools:targetApi="lollipop" />
+                    android:textColor="@color/black" />
                 <Button
                     android:id="@+id/save_btn"
-                    android:layout_marginLeft="05dp"
+                    android:layout_marginStart="04dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#002C28"
                     android:text="Next"
                     android:textColor="@color/white"
-                    tools:targetApi="lollipop" />
+                     />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

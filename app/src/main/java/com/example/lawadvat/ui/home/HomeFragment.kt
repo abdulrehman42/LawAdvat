@@ -25,12 +25,12 @@ import com.google.firebase.auth.FirebaseUser
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private lateinit var firebaseAuth: FirebaseAuth
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
 
         val homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
         Glide.with(this)
             .load(user.photoUrl)
             .into(binding.profile)
-        binding.name.text="WELCOME BACK,\n\t\t "+ user.displayName
+        binding.name.text="WELCOME BACK,\n\t\t\t"+ user.displayName
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -76,9 +76,11 @@ class HomeFragment : Fragment() {
 
     private fun slider() {
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel("https://bit.ly/2YoJ77H"))
-        imageList.add(SlideModel("https://bit.ly/2BteuF2"))
-        imageList.add(SlideModel("https://bit.ly/3fLJf72"))
+        imageList.add(SlideModel("https://c4.wallpaperflare.com/wallpaper/492/496/909/costume-law-lawyer-businessman-wallpaper-preview.jpg"))
+        imageList.add(SlideModel("https://c0.wallpaperflare.com/preview/702/541/307/labor-law-lawyer-legal.jpg"))
+        imageList.add(SlideModel("https://c0.wallpaperflare.com/preview/1014/407/628/adults-businessman-close-up-collaboration.jpg"))
+        imageList.add(SlideModel("https://c1.wallpaperflare.com/preview/866/662/390/lawyers-personal-injury-accident-claim.jpg"))
+        imageList.add(SlideModel("https://c1.wallpaperflare.com/preview/984/81/242/defense-attorney-defense-lawyer-criminal-defense-lawyer.jpg"))
         val imageSlider = requireActivity().findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)
     }
