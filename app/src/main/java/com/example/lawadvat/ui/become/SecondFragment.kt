@@ -16,8 +16,8 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSecondBinding.inflate(layoutInflater)
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array: ArrayList<String>? = arguments?.getStringArrayList("key")
+        val array1: ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.backBtn.setOnClickListener {
             if (array!=null) {
                 move_back(array)
@@ -30,17 +30,31 @@ class SecondFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             if (array?.size!! > 6) {
                 alternative(array)
-            }else if (array.size <6)
+            }else if (array.size ==5)
             {
                 forwar_data(array)
             }
             else if (array1 != null) {
                     alternative(array1)
+            }else  {
+                move_on(array)
             }
         }
         return binding.root
     }
-    fun alternative(array:java.util.ArrayList<String>) {
+
+    private fun move_on(array: ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
+        val thirdFragment = ThirdFragment()
+        thirdFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, thirdFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+
+    fun alternative(array:ArrayList<String>) {
         val n = binding.itemCountry.text.toString()
         val e = binding.itemProvince.text.toString()
         val num = binding.itemCity.text.toString()

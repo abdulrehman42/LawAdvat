@@ -29,26 +29,30 @@ class ForthFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             if (array?.size!! > 12) {
                 alternative(array)
-            }else if (array.size <12)
+            }else if (array.size ==12)
             {
                 forward_data(array)
             }
             else if (array1 != null) {
                 alternative(array1)
             }
+            else
+            {
+                move_on(array)
+            }
         }
         return binding.root
     }
-    /*private fun back_data() {
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
-        if (array != null) {
-            move_back(array)
-
-        } else if (array1 != null) {
-            move_back(array1)
-        }
-    }*/
+    fun move_on(array: java.util.ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
+        val fifthFragment = FifthFragment()
+        fifthFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, fifthFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
     fun alternative(array:java.util.ArrayList<String>) {
         val n = binding.itemDesc.text.toString()
         val e = binding.itemExperience.text.toString()

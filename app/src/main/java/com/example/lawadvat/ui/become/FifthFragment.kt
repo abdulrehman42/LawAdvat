@@ -28,12 +28,16 @@ class FifthFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             if (array?.size!! > 15) {
                 alternative(array)
-            }else if (array.size <15)
+            }else if (array.size ==15)
             {
                 forward_data(array)
             }
             else if (array1 != null) {
                 alternative(array1)
+            }
+            else
+            {
+                move_on(array)
             }
         }
         return binding.root
@@ -96,6 +100,16 @@ class FifthFragment : Fragment() {
         array[18]=c
         val bundle = Bundle()
         bundle.putSerializable("key", array)
+        val sixthFragment = SixthFragment()
+        sixthFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, sixthFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+    fun move_on(array: java.util.ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
         val sixthFragment = SixthFragment()
         sixthFragment.arguments = bundle
         fragmentManager?.beginTransaction()

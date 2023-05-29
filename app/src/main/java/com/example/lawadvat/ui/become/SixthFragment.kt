@@ -15,6 +15,7 @@ class SixthFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding= FragmentSixthBinding.inflate(layoutInflater)
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.backBtn.setOnClickListener {
@@ -28,15 +29,29 @@ class SixthFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             if (array?.size!! > 19) {
                 alternative(array)
-            }else if (array.size <19)
+            }else if (array.size==19)
             {
                 forward_data(array)
             }
             else if (array1 != null) {
                 alternative(array1)
             }
+            else
+            {
+                move_on(array)
+            }
         }
         return binding.root
+    }
+    fun move_on(array: java.util.ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
+        val seventhFragmen = SeventhFragmen()
+        seventhFragmen.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, seventhFragmen)
+            ?.addToBackStack(null)
+            ?.commit()
     }
     fun alternative(array:java.util.ArrayList<String>) {
         val n = binding.itemFirst1.text.toString()

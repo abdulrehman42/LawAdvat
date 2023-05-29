@@ -119,10 +119,10 @@ class SeventhFragmen : Fragment() {
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {
-            binding.itemName.setText(array1[0].toString())
-            binding.itemEmail.setText(array1[1].toString())
-            binding.itemNumber.setText(array1[2].toString())
-            binding.itemCnic.setText(array1 [3].toString())
+            binding.itemName.setText(array1[0])
+            binding.itemEmail.setText(array1[1])
+            binding.itemNumber.setText(array1[2])
+            binding.itemCnic.setText(array1 [3])
             if (array1?.get(4)?.equals("Male") == true)
             {
                 binding.male.isChecked=true

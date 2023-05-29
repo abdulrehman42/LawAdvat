@@ -16,30 +16,47 @@ class ThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentThirdBinding.inflate(layoutInflater)
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+
         binding.saveBtn.setOnClickListener {
+            val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+            val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
             if (array?.size!! > 9) {
                 alternative(array)
-            }else if (array.size <9)
+            }
+            else if (array.size==9)
             {
                 forward_data(array)
             }
             else if (array1 != null) {
                 alternative(array1)
             }
+            else
+            {
+                move_on(array)
+            }
         }
         binding.backBtn.setOnClickListener {
+            val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+            val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
             if (array!=null) {
                 move_back(array)
             }
-            else if(array1!=null){
+            else if (array1!=null){
                 move_back(array1)
             }
         }
         return binding.root
     }
-
+    fun move_on(array: java.util.ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
+        val forthFragment = ForthFragment()
+        forthFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
   /*  private fun back_data() {
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
