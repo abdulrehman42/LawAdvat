@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentSecondBinding
+import java.util.ArrayList
 
 class SecondFragment : Fragment() {
     lateinit var binding: FragmentSecondBinding
@@ -20,37 +20,59 @@ class SecondFragment : Fragment() {
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.backBtn.setOnClickListener {
             if (array!=null) {
-                val bundle = Bundle()
-                bundle.putSerializable("key1", array)
-                val firstFragment = FirstFragment()
-                firstFragment.arguments = bundle
-                fragmentManager?.beginTransaction()
-                    ?.replace(R.id.nav_host_fragment_activity_main, firstFragment)
-                    ?.addToBackStack(null)
-                    ?.commit()
-            } else {
-                val bundle = Bundle()
-                bundle.putSerializable("key1", array1)
-                val firstFragment = FirstFragment()
-                firstFragment.arguments = bundle
-                fragmentManager?.beginTransaction()
-                    ?.replace(R.id.nav_host_fragment_activity_main, firstFragment)
-                    ?.addToBackStack(null)
-                    ?.commit()
+                move_back(array)
+            }
+            else if (array1!=null){
+              move_back(array1)
             }
 
         }
         binding.saveBtn.setOnClickListener {
-            forwar_data()
+            if (array?.size!! > 6) {
+                alternative(array)
+            }else if (array.size <6)
+            {
+                forwar_data(array)
+            }
+            else if (array1 != null) {
+                    alternative(array1)
+            }
         }
         return binding.root
     }
-
-    private fun forwar_data() {
-        val country = binding.itemCountry.text.toString().trim()
-        val province = binding.itemProvince.text.toString().trim()
-        val city = binding.itemCity.text.toString().trim()
-        val location = binding.itemLocation.text.toString().trim()
+    fun alternative(array:java.util.ArrayList<String>) {
+        val n = binding.itemCountry.text.toString()
+        val e = binding.itemProvince.text.toString()
+        val num = binding.itemCity.text.toString()
+        val c = binding.itemLocation.text.toString()
+        array[5] = n
+        array[6] = e
+        array[7] = num
+        array[8] = c
+        val bundle = Bundle()
+        bundle.putSerializable("key", array)
+        val thirdFragment = ThirdFragment()
+        thirdFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, thirdFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+        }
+    private fun move_back(array:java.util.ArrayList<String>) {
+        val bundle = Bundle()
+        bundle.putSerializable("key1", array)
+        val firstFragment = FirstFragment()
+        firstFragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, firstFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+    private fun forwar_data(array: ArrayList<String>) {
+        val country = binding.itemCountry.text.toString()
+        val province = binding.itemProvince.text.toString()
+        val city = binding.itemCity.text.toString()
+        val location = binding.itemLocation.text.toString()
         if (province.isEmpty())
         {
             binding.layoutProvince.error="please fill this field"
@@ -61,18 +83,10 @@ class SecondFragment : Fragment() {
             binding.layoutLocation.error = "Please fill this field"
         } else {
             //val data:ArrayList<String> = arguments?.getStringArrayList("key") as ArrayList<String>
-            val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-            val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
-            if (array!=null) {
-                array.add(country)
-                array.add(province)
-                array.add(city)
-                array.add(location)
-                /*array[5]=country
-                array[6]=province
-                array[7]=city
-                array[8]=location*/
-
+            array.add(country)
+            array.add(province)
+            array.add(city)
+            array.add(location)
                 val bundle = Bundle()
                 bundle.putSerializable("key", array)
                 val thirdFragment = ThirdFragment()
@@ -81,9 +95,9 @@ class SecondFragment : Fragment() {
                     ?.replace(R.id.nav_host_fragment_activity_main, thirdFragment)
                     ?.addToBackStack(null)
                     ?.commit()
-            }
-                 else if (array1!=null) {
-                    array1[5] = country.toString()
+
+                /* else if (array1!=null) {
+                    array1[5] = country
                     array1[6] = province
                     array1[7] = city
                     array1[8] = location
@@ -95,7 +109,7 @@ class SecondFragment : Fragment() {
                         ?.replace(R.id.nav_host_fragment_activity_main, thirdFragment)
                         ?.addToBackStack(null)
                         ?.commit()
-                }
+                }*/
             }
         }
 
@@ -103,16 +117,21 @@ class SecondFragment : Fragment() {
         super.onStart()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {
             in_it(array1)
+        } else if (array?.size!! > 6)
+        {
+            in_it(array)
         }
     }
 
-    private fun in_it(array1: ArrayList<String>) {
-        binding.itemCountry.setText(array1[5])
-        binding.itemProvince.setText(array1[6])
-        binding.itemCity.setText(array1[7])
-        binding.itemLocation.setText(array1[8])
+    private fun in_it(array1:java.util.ArrayList<String>) {
+            binding.itemCountry.setText(array1[5]).toString()
+            binding.itemProvince.setText(array1[6]).toString()
+            binding.itemCity.setText(array1[7]).toString()
+            binding.itemLocation.setText(array1[8]).toString()
+
     }
 }

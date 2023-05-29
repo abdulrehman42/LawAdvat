@@ -16,16 +16,31 @@ class ThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentThirdBinding.inflate(layoutInflater)
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.saveBtn.setOnClickListener {
-            forward_data()
+            if (array?.size!! > 9) {
+                alternative(array)
+            }else if (array.size <9)
+            {
+                forward_data(array)
+            }
+            else if (array1 != null) {
+                alternative(array1)
+            }
         }
         binding.backBtn.setOnClickListener {
-            back_data()
+            if (array!=null) {
+                move_back(array)
+            }
+            else if(array1!=null){
+                move_back(array1)
+            }
         }
         return binding.root
     }
 
-    private fun back_data() {
+  /*  private fun back_data() {
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         if (array != null) {
@@ -35,7 +50,7 @@ class ThirdFragment : Fragment() {
             move_back(array1)
         }
 
-    }
+    }*/
 
     private fun move_back(array: ArrayList<String>) {
         val bundle = Bundle()
@@ -47,8 +62,7 @@ class ThirdFragment : Fragment() {
             ?.commit()
     }
 
-    private fun forward_data() {
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+    private fun forward_data(array: java.util.ArrayList<String>) {
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         val general = binding.itemGeneral.text.toString().trim()
         val high = binding.itemHigh.text.toString().trim()
@@ -60,38 +74,55 @@ class ThirdFragment : Fragment() {
         } else if (supreme.isEmpty()) {
             binding.layoutSupreme.error = "Please fill this field"
         } else {
-            if (array != null) {
-                move_on(array,general,high,supreme)
-
-            } else if (array1 != null) {
-                move_on(array1,general,high,supreme)
-            }
+            array.add(general)
+            array.add(high)
+            array.add(supreme)
+            val bundle = Bundle()
+            bundle.putSerializable("key", array)
+            val forthFragment = ForthFragment()
+            forthFragment.arguments = bundle
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+                ?.addToBackStack(null)
+                ?.commit()
         }
     }
-
-    private fun move_on(array: ArrayList<String>, general: String, high: String, supreme: String) {
-        array.add(general)
-        array.add(high)
-        array.add(supreme)
+    fun alternative(array:java.util.ArrayList<String>) {
+        val n = binding.itemGeneral.text.toString()
+        val e = binding.itemHigh.text.toString()
+        val num = binding.itemSupreme.text.toString()
+        array[9] = n
+        array[10] = e
+        array[11] = num
         val bundle = Bundle()
         bundle.putSerializable("key", array)
-        val forthFragment = ForthFragment()
-        forthFragment.arguments = bundle
+        val forthfragment = ForthFragment()
+        forthfragment.arguments = bundle
         fragmentManager?.beginTransaction()
-            ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+            ?.replace(R.id.nav_host_fragment_activity_main, forthfragment)
             ?.addToBackStack(null)
             ?.commit()
     }
+
 
     override fun onStart() {
         super.onStart()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {
-            binding.itemGeneral.setText(array1?.get(9).toString())
-            binding.itemHigh.setText(array1?.get(10).toString())
-            binding.itemSupreme.setText(array1?.get(11).toString())
+            in_it(array1)
+        } else if (array?.size!! > 9)
+        {
+            in_it(array)
         }
+
+    }
+
+    private fun in_it(array1: ArrayList<String>) {
+        binding.itemGeneral.setText(array1[9].toString())
+        binding.itemHigh.setText(array1[10].toString())
+        binding.itemSupreme.setText(array1[11].toString())
     }
 }

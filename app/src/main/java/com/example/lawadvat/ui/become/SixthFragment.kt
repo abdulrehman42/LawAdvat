@@ -15,16 +15,48 @@ class SixthFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentSixthBinding.inflate(layoutInflater)
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.backBtn.setOnClickListener {
-            back_data()
+            if (array!=null) {
+                move_back(array)
+            }
+            else if(array1!=null){
+                move_back(array1)
+            }
         }
         binding.saveBtn.setOnClickListener {
-            forward_data()
+            if (array?.size!! > 19) {
+                alternative(array)
+            }else if (array.size <19)
+            {
+                forward_data(array)
+            }
+            else if (array1 != null) {
+                alternative(array1)
+            }
         }
         return binding.root
     }
-    private fun back_data() {
+    fun alternative(array:java.util.ArrayList<String>) {
+        val n = binding.itemFirst1.text.toString()
+        val e = binding.itemSecond2.text.toString()
+        val num = binding.itemThird3.text.toString()
+        val c=binding.itemForth4.text.toString()
+        array[19] = n
+        array[20] = e
+        array[21] = num
+        array[22]=c
+        val bundle = Bundle()
+        bundle.putSerializable("key", array)
+        val seventhFragmen = SeventhFragmen()
+        seventhFragmen.arguments = bundle
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, seventhFragmen)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+    /*private fun back_data() {
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         if (array != null) {
@@ -32,10 +64,9 @@ class SixthFragment : Fragment() {
         } else if (array1 != null) {
             move_back(array1)
         }
-    }
-    private fun forward_data() {
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+    }*/
+    private fun forward_data(array: java.util.ArrayList<String>) {
+
         val high = binding.itemFirst1.text.toString().trim()
         val medium = binding.itemSecond2.text.toString().trim()
         val enter_mediumee = binding.itemThird3.text.toString().trim()
@@ -49,32 +80,19 @@ class SixthFragment : Fragment() {
         }else if (low.isEmpty()) {
             binding.layoutForth4.error = "Please fill this field"
         } else {
-            if (array != null) {
-                move_on(array,high,medium,enter_mediumee,low)
-            } else if (array1 != null) {
-                move_on(array1,high,medium,enter_mediumee,low)
-            }
+            array.add(high)
+            array.add(medium)
+            array.add(enter_mediumee)
+            array.add(low)
+            val bundle = Bundle()
+            bundle.putSerializable("key", array)
+            val seventhFragment = SeventhFragmen()
+            seventhFragment.arguments = bundle
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.nav_host_fragment_activity_main, seventhFragment)
+                ?.addToBackStack(null)
+                ?.commit()
         }
-    }
-    private fun move_on(
-        array: ArrayList<String>,
-        high: String,
-        medium: String,
-        enter_mediumee: String,
-        low: String
-    ) {
-        array.add(high)
-        array.add(medium)
-        array.add(enter_mediumee)
-        array.add(low)
-        val bundle = Bundle()
-        bundle.putSerializable("key", array)
-        val seventhFragment = SeventhFragmen()
-        seventhFragment.arguments = bundle
-        fragmentManager?.beginTransaction()
-            ?.replace(R.id.nav_host_fragment_activity_main, seventhFragment)
-            ?.addToBackStack(null)
-            ?.commit()
     }
     private fun move_back(array: ArrayList<String>) {
         val bundle = Bundle()
@@ -89,13 +107,21 @@ class SixthFragment : Fragment() {
         super.onStart()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {
-            binding.itemFirst1.setText(array1?.get(19).toString())
-            binding.itemSecond2.setText(array1?.get(20).toString())
-            binding.itemThird3.setText(array1?.get(21).toString())
-            binding.itemForth4.setText(array1?.get(22).toString())
+            in_it(array1)
+        } else if (array?.size!! > 19)
+        {
+            in_it(array)
         }
+    }
+
+    private fun in_it(array1: ArrayList<String>) {
+        binding.itemFirst1.setText(array1?.get(19).toString())
+        binding.itemSecond2.setText(array1?.get(20).toString())
+        binding.itemThird3.setText(array1?.get(21).toString())
+        binding.itemForth4.setText(array1?.get(22).toString())
     }
 
 }
