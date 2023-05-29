@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentSeventhBinding
 import com.example.lawadvat.ui.become.entity.Requirement
@@ -120,20 +123,32 @@ class SeventhFragmen : Fragment() {
         val myRef = database.getReference("Lawyer").child(user)
         myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
         general__id = array[5],high_court_id = array[6],supreme_court_id = array[7], country = array[8], province = array[9], city = array[10], office_location = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22]))
-        fragmentManager?.beginTransaction()
+        /*val fragmentManager:FragmentManager  = requireActivity().supportFragmentManager; // If using AppCompatActivity
+        val transaction:FragmentTransaction  = fragmentManager.beginTransaction()
+        transaction.setReorderingAllowed(true)
+        transaction.replace(R.id.nav_host_fragment_activity_main, HomeFragment());
+        transaction.addToBackStack(null);
+        transaction.commit()*/
+        /*fragmentManager?.beginTransaction()
             ?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
             ?.addToBackStack(null)
-            ?.commit()
-        fragmentManager?.popBackStack()
+            ?.commit()*/
+        getActivity()?.fragmentManager?.popBackStack();
         Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
+
+
 
     }
     override fun onStart() {
         super.onStart()
+        val user_img=FirebaseAuth.getInstance()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {
+            Glide.with(this)
+                .load(user_img.currentUser?.photoUrl)
+                .into(binding.profile)
             binding.itemName.setText(array1[0])
             binding.itemEmail.setText(array1[1])
             binding.itemNumber.setText(array1[2])

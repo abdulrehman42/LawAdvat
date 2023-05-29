@@ -42,7 +42,7 @@
             android:id="@+id/item_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pakistan"
+            android:hint="Country"
             android:inputType="text"
             tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -90,8 +90,9 @@
             android:layout_marginTop="04dp"
             app:errorEnabled="true"
             app:endIconCheckable="true"
+            app:endIconMode="custom"
             app:endIconDrawable="@drawable/baseline_location_on_24"
-            app:endIconTint="@color/black"
+            app:endIconTint="@color/teal_700"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:hintTextColor="@color/teal_700"
             app:boxStrokeColor="@color/teal_700"

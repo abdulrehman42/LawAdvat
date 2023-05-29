@@ -126,7 +126,7 @@ class SixthFragment : Fragment() {
         if (array1!=null)
         {
             in_it(array1)
-        } else if (array?.size!! > 15)
+        } else if (array?.size!! > 19)
         {
             in_it(array)
         }
