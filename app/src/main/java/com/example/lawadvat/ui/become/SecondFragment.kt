@@ -5,20 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentSecondBinding
 import java.util.ArrayList
 
 class SecondFragment : Fragment() {
     lateinit var binding: FragmentSecondBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSecondBinding.inflate(layoutInflater)
-        val array: ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         binding.backBtn.setOnClickListener {
+
             if (array!=null) {
                 move_back(array)
             }
@@ -28,16 +31,19 @@ class SecondFragment : Fragment() {
 
         }
         binding.saveBtn.setOnClickListener {
-            if (array?.size!! > 6) {
-                alternative(array)
-            }else if (array.size ==5)
-            {
-                forwar_data(array)
+
+            if (array!=null) {
+                if (array?.size!! > 6) {
+                    alternative(array)
+                } else if (array.size == 5) {
+                    forwar_data(array)
+                }
+                else  {
+                    move_on(array)
+                }
             }
             else if (array1 != null) {
                     alternative(array1)
-            }else  {
-                move_on(array)
             }
         }
         return binding.root

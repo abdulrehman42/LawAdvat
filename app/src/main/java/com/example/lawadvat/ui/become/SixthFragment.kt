@@ -27,18 +27,18 @@ class SixthFragment : Fragment() {
             }
         }
         binding.saveBtn.setOnClickListener {
-            if (array?.size!! > 19) {
-                alternative(array)
-            }else if (array.size==19)
-            {
-                forward_data(array)
+            if (array!=null) {
+                if (array?.size!! > 19) {
+                    alternative(array)
+                } else if (array.size == 18) {
+                    forward_data(array)
+                }
+                else  {
+                    forward_data(array)
+                }
             }
             else if (array1 != null) {
                 alternative(array1)
-            }
-            else
-            {
-                move_on(array)
             }
         }
         return binding.root
@@ -126,10 +126,11 @@ class SixthFragment : Fragment() {
         if (array1!=null)
         {
             in_it(array1)
-        } else if (array?.size!! > 19)
+        } else if (array?.size!! > 15)
         {
             in_it(array)
         }
+       
     }
 
     private fun in_it(array1: ArrayList<String>) {

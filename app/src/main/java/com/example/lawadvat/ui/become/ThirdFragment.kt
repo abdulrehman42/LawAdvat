@@ -16,28 +16,26 @@ class ThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentThirdBinding.inflate(layoutInflater)
-
+        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         binding.saveBtn.setOnClickListener {
-            val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-            val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
-            if (array?.size!! > 9) {
-                alternative(array)
-            }
-            else if (array.size==9)
-            {
-                forward_data(array)
+
+            if (array!=null) {
+                if (array.size > 9) {
+                    alternative(array)
+                } else if (array.size == 8) {
+                    forward_data(array)
+                }
+                else  {
+                    forward_data(array)
+                }
             }
             else if (array1 != null) {
                 alternative(array1)
             }
-            else
-            {
-                move_on(array)
-            }
         }
         binding.backBtn.setOnClickListener {
-            val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-            val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+
             if (array!=null) {
                 move_back(array)
             }
@@ -57,18 +55,6 @@ class ThirdFragment : Fragment() {
             ?.addToBackStack(null)
             ?.commit()
     }
-  /*  private fun back_data() {
-        val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
-        if (array != null) {
-            move_back(array)
-
-        } else if (array1 != null) {
-            move_back(array1)
-        }
-
-    }*/
-
     private fun move_back(array: ArrayList<String>) {
         val bundle = Bundle()
         bundle.putSerializable("key1", array)

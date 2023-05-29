@@ -1,20 +1,24 @@
 package com.example.lawadvat.ui.become
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.fragment.app.Fragment
 import com.example.lawadvat.R
-import com.example.lawadvat.databinding.FragmentSecondBinding
 import com.example.lawadvat.databinding.FragmentSeventhBinding
+import com.example.lawadvat.ui.become.entity.Requirement
+import com.example.lawadvat.ui.home.HomeFragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class SeventhFragmen : Fragment() {
     lateinit var binding: FragmentSeventhBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -110,6 +114,17 @@ class SeventhFragmen : Fragment() {
         array[20] = study2
         array[21] = study3
         array[22]=study4
+        val database = FirebaseDatabase.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        val user_img=FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
+        val myRef = database.getReference("Lawyer").child(user)
+        myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
+        general__id = array[5],high_court_id = array[6],supreme_court_id = array[7], country = array[8], province = array[9], city = array[10], office_location = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22]))
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
+            ?.addToBackStack(null)
+            ?.commit()
+        fragmentManager?.popBackStack()
         Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
 
     }

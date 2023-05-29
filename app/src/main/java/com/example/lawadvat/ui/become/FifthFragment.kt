@@ -26,18 +26,18 @@ class FifthFragment : Fragment() {
             }
         }
         binding.saveBtn.setOnClickListener {
-            if (array?.size!! > 15) {
-                alternative(array)
-            }else if (array.size ==15)
-            {
-                forward_data(array)
+            if (array!=null) {
+                if (array?.size!! > 15) {
+                    alternative(array)
+                } else if (array.size == 14) {
+                    forward_data(array)
+                }
+                else  {
+                    forward_data(array)
+                }
             }
             else if (array1 != null) {
                 alternative(array1)
-            }
-            else
-            {
-                move_on(array)
             }
         }
         return binding.root
