@@ -3,6 +3,7 @@ package com.example.lawadvat.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +18,24 @@ import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentHomeBinding
 import com.example.lawadvat.ui.home.adapter.ListItem
 import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
+import com.example.lawadvat.ui.home.adapter.lawyers.Lawyer
+import com.example.lawadvat.ui.home.adapter.lawyers.LawyerAdapter
 import com.example.lawadvat.ui.signup.Signup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -43,12 +54,33 @@ class HomeFragment : Fragment() {
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             update_ui(user)
+            get_result()
             Toast.makeText(requireContext(), user.displayName, Toast.LENGTH_LONG).show()
 
         } else {
             val intent=Intent(context,Signup::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun get_result() {
+        database = Firebase.database.reference
+        val list:ArrayList<Lawyer?> = ArrayList()
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val result: Lawyer? =postSnapshot.children.first().getValue(Lawyer::class.java)!!
+                    list.add(result)
+                    Log.d("ali","$list")
+                    recyclerview_hire(list)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+               Toast.makeText(requireContext(),"What's wrong with you",Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -71,9 +103,21 @@ class HomeFragment : Fragment() {
             true
         )
         binding.specificationRecyclerview.adapter = adapter
+
         adapter.notifyDataSetChanged()
     }
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun recyclerview_hire(list: ArrayList<Lawyer?>) {
+        val adapter=LawyerAdapter(requireContext(),list)
+        binding.lawyerRecyclerview.setHasFixedSize(true)
+        binding.lawyerRecyclerview.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            true
+        )
+        binding.lawyerRecyclerview.adapter = adapter
+        adapter.notifyDataSetChanged()
+    }
     private fun slider() {
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel("https://c4.wallpaperflare.com/wallpaper/492/496/909/costume-law-lawyer-businessman-wallpaper-preview.jpg"))

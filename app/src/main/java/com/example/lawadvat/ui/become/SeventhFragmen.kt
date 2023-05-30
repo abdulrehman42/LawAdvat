@@ -122,7 +122,7 @@ class SeventhFragmen : Fragment() {
         val user_img=FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
         val myRef = database.getReference("Lawyer").child(user)
         myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-        general__id = array[5],high_court_id = array[6],supreme_court_id = array[7], country = array[8], province = array[9], city = array[10], office_location = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22]))
+        general__id = array[5],high_court_id = array[6],supreme_court_id = array[10], country = array[8], province = array[9], city = array[7], office_location = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22]))
         /*val fragmentManager:FragmentManager  = requireActivity().supportFragmentManager; // If using AppCompatActivity
         val transaction:FragmentTransaction  = fragmentManager.beginTransaction()
         transaction.setReorderingAllowed(true)
@@ -133,7 +133,7 @@ class SeventhFragmen : Fragment() {
             ?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
             ?.addToBackStack(null)
             ?.commit()*/
-        getActivity()?.fragmentManager?.popBackStack();
+        activity?.fragmentManager?.popBackStack()
         Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
 
 

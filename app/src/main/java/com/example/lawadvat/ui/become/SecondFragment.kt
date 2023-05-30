@@ -10,6 +10,8 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.text.Editable
 import androidx.fragment.app.Fragment
@@ -185,6 +187,14 @@ class SecondFragment : Fragment() {
                 }
                 mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
                     val location: Location? = task.result
+/*
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //val mainIntent = Intent(this, Menu::class.java)
+                        //startActivity(mainIntent)
+                        finish()
+                    }, task.isComplete as Long)
+*/
+
                     if (location != null) {
                         val geocoder = Geocoder(requireContext(), Locale.getDefault())
                         val list: List<Address> =
