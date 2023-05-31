@@ -3,7 +3,6 @@ package com.example.lawadvat.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,9 @@ import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentHomeBinding
+import com.example.lawadvat.ui.become.entity.Requirement
 import com.example.lawadvat.ui.home.adapter.ListItem
 import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
-import com.example.lawadvat.ui.home.adapter.lawyers.Lawyer
 import com.example.lawadvat.ui.home.adapter.lawyers.LawyerAdapter
 import com.example.lawadvat.ui.signup.Signup
 import com.google.firebase.auth.FirebaseAuth
@@ -42,7 +41,6 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
-
         val homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(layoutInflater)
@@ -53,8 +51,11 @@ class HomeFragment : Fragment() {
         super.onStart()
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         if (user != null) {
+
             update_ui(user)
             get_result()
+
+
             Toast.makeText(requireContext(), user.displayName, Toast.LENGTH_LONG).show()
 
         } else {
@@ -65,13 +66,12 @@ class HomeFragment : Fragment() {
 
     private fun get_result() {
         database = Firebase.database.reference
-        val list:ArrayList<Lawyer?> = ArrayList()
+        val list:ArrayList<Requirement?> = ArrayList()
         database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
-                    val result: Lawyer? =postSnapshot.children.first().getValue(Lawyer::class.java)!!
+                    val result: Requirement? =postSnapshot.children.first().getValue(Requirement::class.java)!!
                     list.add(result)
-                    Log.d("ali","$list")
                     recyclerview_hire(list)
                 }
             }
@@ -107,7 +107,7 @@ class HomeFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
     @SuppressLint("NotifyDataSetChanged")
-    private fun recyclerview_hire(list: ArrayList<Lawyer?>) {
+    private fun recyclerview_hire(list: ArrayList<Requirement?>) {
         val adapter=LawyerAdapter(requireContext(),list)
         binding.lawyerRecyclerview.setHasFixedSize(true)
         binding.lawyerRecyclerview.layoutManager = LinearLayoutManager(

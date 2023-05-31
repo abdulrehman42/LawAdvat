@@ -88,12 +88,6 @@ class SixthFragment : Fragment() {
         val low = binding.itemForth4.text.toString().trim()
         if (high.isEmpty()) {
             binding.layoutFirst1.error = "Please fill this field"
-        } else if (medium.isEmpty()) {
-            binding.layoutSecond2.error = "Please fill this field"
-        } else if (enter_mediumee.isEmpty()) {
-            binding.layoutThird3.error = "Please fill this field"
-        }else if (low.isEmpty()) {
-            binding.layoutForth4.error = "Please fill this field"
         } else {
             array.add(high)
             array.add(medium)
@@ -108,6 +102,7 @@ class SixthFragment : Fragment() {
                 ?.addToBackStack(null)
                 ?.commit()
         }
+
     }
     private fun move_back(array: ArrayList<String>) {
         val bundle = Bundle()

@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#0E1C6A"
+            android:background="#152267"
             android:orientation="vertical">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:id="@+id/fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="15dp"
         android:text="fee"
         android:fontFamily="serif"
         android:textColor="@color/white"
@@ -59,24 +59,30 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:layout_marginTop="4dp"
         android:fontFamily="serif"
+        android:maxLines="2"
+        android:text="Description"
 
         android:textColor="@color/white"
-        android:layout_marginTop="4dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/fee"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hire"
-                android:layout_gravity="right"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:background="@color/teal_700"/>
+    <Button
+        android:id="@+id/hire_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hire"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:background="@drawable/buttonradius"/>
+
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.appcompat.widget.LinearLayoutCompat>

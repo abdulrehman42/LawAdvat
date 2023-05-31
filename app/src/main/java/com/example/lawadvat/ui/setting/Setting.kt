@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -27,9 +28,11 @@ class Setting : Fragment() {
     ): View? {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.teal_700);
-
         binding= FragmentSettingBinding.inflate(inflater)
-        requireActivity()?.actionBar?.hide()
+        requireActivity()?.actionBar?.title = "Profile"
+        val prefs = requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE)
+        val check = prefs.getBoolean("lawyer",false)
+        binding.become.isVisible = !check
         viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
         auth=FirebaseAuth.getInstance()
         binding.displayNameSetting.text=auth.currentUser?.displayName
@@ -39,6 +42,10 @@ class Setting : Fragment() {
 
         binding.logout.setOnClickListener{
             auth.signOut()
+            val editor =
+                requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
+            editor.putBoolean("lawyer", false)
+            editor.apply()
             val intent=Intent(requireActivity(),MainActivity::class.java)
             startActivity(intent)
         }

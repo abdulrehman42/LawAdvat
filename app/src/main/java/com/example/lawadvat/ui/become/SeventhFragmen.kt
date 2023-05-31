@@ -1,15 +1,18 @@
 package com.example.lawadvat.ui.become
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import com.example.lawadvat.MainActivity
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentSeventhBinding
 import com.example.lawadvat.ui.become.entity.Requirement
@@ -27,6 +30,7 @@ class SeventhFragmen : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentSeventhBinding.inflate(layoutInflater)
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         binding.backBtn.setOnClickListener {
             back_data()
@@ -122,7 +126,7 @@ class SeventhFragmen : Fragment() {
         val user_img=FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
         val myRef = database.getReference("Lawyer").child(user)
         myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-        general__id = array[5],high_court_id = array[6],supreme_court_id = array[10], country = array[8], province = array[9], city = array[7], office_location = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22]))
+        country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22],layer = true))
         /*val fragmentManager:FragmentManager  = requireActivity().supportFragmentManager; // If using AppCompatActivity
         val transaction:FragmentTransaction  = fragmentManager.beginTransaction()
         transaction.setReorderingAllowed(true)
@@ -134,6 +138,12 @@ class SeventhFragmen : Fragment() {
             ?.addToBackStack(null)
             ?.commit()*/
         activity?.fragmentManager?.popBackStack()
+        val editor =
+            requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
+        editor.putBoolean("lawyer", true)
+        editor.apply()
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
         Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
 
 
@@ -142,7 +152,7 @@ class SeventhFragmen : Fragment() {
     override fun onStart() {
         super.onStart()
         val user_img=FirebaseAuth.getInstance()
-        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
+
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         if (array1!=null)
         {

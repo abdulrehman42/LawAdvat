@@ -555,7 +555,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#002C28"
-                    android:text="Next"
+                    android:text="Save"
                     android:textColor="@color/white"
                     />
             </LinearLayout>

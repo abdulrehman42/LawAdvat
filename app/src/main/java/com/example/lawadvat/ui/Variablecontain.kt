@@ -1,0 +1,18 @@
+package com.example.lawadvat.ui
+
+class Variablecontain {
+    companion object{
+        val name="name"
+        val img="pic"
+        val location="location"
+        val exp="exp"
+        val des="des"
+        val case1="case1"
+        val case2="case2"
+        val case3="case3"
+        val case4="case4"
+        val fee="fee"
+
+
+    }
+}

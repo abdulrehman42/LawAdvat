@@ -10,7 +10,11 @@
         android:name="com.example.lawadvat.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
+    <fragment
+        android:id="@+id/navigation_lawyer"
+        android:name="com.example.lawadvat.ui.profile.LawyerProfile"
+        android:label="@string/Profile"
+        tools:layout="@layout/fragment_lawyer_profile" />
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.lawadvat.ui.dashboard.DashboardFragment"
