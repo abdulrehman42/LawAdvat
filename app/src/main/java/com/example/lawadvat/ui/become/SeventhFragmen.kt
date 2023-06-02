@@ -127,27 +127,16 @@ class SeventhFragmen : Fragment() {
         val myRef = database.getReference("Lawyer").child(user)
         myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
         country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22],layer = true))
-        /*val fragmentManager:FragmentManager  = requireActivity().supportFragmentManager; // If using AppCompatActivity
-        val transaction:FragmentTransaction  = fragmentManager.beginTransaction()
-        transaction.setReorderingAllowed(true)
-        transaction.replace(R.id.nav_host_fragment_activity_main, HomeFragment());
-        transaction.addToBackStack(null);
-        transaction.commit()*/
-        /*fragmentManager?.beginTransaction()
-            ?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
-            ?.addToBackStack(null)
-            ?.commit()*/
-        activity?.fragmentManager?.popBackStack()
         val editor =
             requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
         editor.putBoolean("lawyer", true)
         editor.apply()
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
+        requireActivity().finish()
+        /*val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.putExtra("check",true)
+        startActivity(intent)*/
         Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
-
-
-
+        //activity?.fragmentManager?.popBackStack()
     }
     override fun onStart() {
         super.onStart()

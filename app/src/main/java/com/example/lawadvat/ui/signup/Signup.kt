@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.lawadvat.MainActivity
 import com.example.lawadvat.databinding.ActivitySignupBinding
+import com.example.lawadvat.ui.become.entity.Requirement
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,11 +16,19 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 class Signup : AppCompatActivity() {
     private lateinit var binding:ActivitySignupBinding
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var googleoption:GoogleSignInOptions
     lateinit var googleclient: GoogleSignInClient
+    val firebaseAuth1:FirebaseAuth=FirebaseAuth.getInstance()
+    val user=firebaseAuth1.currentUser?.displayName.toString()
+    val databaseRef = FirebaseDatabase.getInstance().reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySignupBinding.inflate(layoutInflater)
@@ -59,9 +68,9 @@ class Signup : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Successfully login", Toast.LENGTH_LONG).show()
-                            val intent=Intent(this,MainActivity::class.java)
-                            startActivity(intent)
-                            //finish()
+                            get_profile()
+                            /*val intent=Intent(this,MainActivity::class.java)
+                            startActivity(intent)*/
                         } else {
                             Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                         }
@@ -74,5 +83,39 @@ class Signup : AppCompatActivity() {
                 Toast.makeText(this,task.exception?.message.toString(), Toast.LENGTH_LONG).show()
             }
         }
+    }
+    fun get_profile()
+    {
+
+        databaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val result: Requirement? =
+                        postSnapshot.child(user).getValue(Requirement::class.java)
+                    if (result?.layer == true) {
+                        val editor =
+                            getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                        editor.putBoolean("lawyer", true)
+                        editor.apply()
+                        val intent = Intent(this@Signup, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else{
+                        val editor =
+                            getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                        editor.putBoolean("lawyer", false)
+                        editor.apply()
+                        val intent = Intent(this@Signup, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@Signup,error.message,Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 }

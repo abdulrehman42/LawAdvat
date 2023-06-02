@@ -37,11 +37,12 @@ class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):Recy
         return list.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val l=list[position]
         holder.name.text=l?.name
         holder.des.text=l?.description
-        holder.fee.text=l?.fee
+        holder.fee.text=l?.fee+"PKR"
         Glide.with(context)
             .load(l?.img)
             .into(holder.img)

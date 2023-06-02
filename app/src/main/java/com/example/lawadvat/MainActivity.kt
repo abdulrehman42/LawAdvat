@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         navController.context.getColor(R.color.black)
         val prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
         val check = prefs.getBoolean("lawyer",false)
+        val v=intent.getBooleanExtra("check",false)
         if (check)
         {
             navController.navigate(R.id.navigation_lawyer)
@@ -31,7 +32,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_lawyer,R.id.navigation_lawyer, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_setting))
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
-        }else
+        } else if (v)
+        {
+            navController.navigate(R.id.navigation_lawyer)
+            val appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.navigation_lawyer,R.id.navigation_lawyer, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_setting))
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
+        }
+        else
         {
             val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home,R.id.navigation_lawyer, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_setting))
@@ -42,6 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        finishAffinity()
     }
 }

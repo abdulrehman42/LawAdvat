@@ -69,7 +69,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="location"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:fontFamily="serif"
                                 android:textColor="@color/black"
                                 android:id="@+id/location"/>
@@ -221,35 +221,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u25BAfirst"
+                android:text="\u25BA---"
                 android:textColor="@color/black"
                 android:fontFamily="serif"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/first_ed"/>
+                android:id="@+id/first_ed"
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="\u25BAsecond"
+                android:text="\u25BA---"
                 android:textColor="@color/black"
                 android:fontFamily="serif"
-                android:id="@+id/second_ed"/>
+                android:id="@+id/second_ed"
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="\u25BAthird"
+                android:text="\u25BA---"
                 android:textColor="@color/black"
                 android:fontFamily="serif"
-                android:id="@+id/third_ed"/>
+                android:id="@+id/third_ed"
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="\u25BAfourth"
+                android:text="\u25BA---"
                 android:textColor="@color/black"
                 android:fontFamily="serif"
-                android:id="@+id/fourth_ed"/>
+                android:id="@+id/fourth_ed"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView

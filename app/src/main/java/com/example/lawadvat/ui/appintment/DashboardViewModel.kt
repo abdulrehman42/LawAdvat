@@ -1,4 +1,4 @@
-package com.example.lawadvat.ui.dashboard
+package com.example.lawadvat.ui.appintment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

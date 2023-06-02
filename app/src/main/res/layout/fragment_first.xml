@@ -34,6 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
                 app:errorEnabled="true"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
@@ -44,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
+                    android:enabled="false"
                     android:inputType="text"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,6 +56,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="04dp"
                 app:errorEnabled="true"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
@@ -64,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="email"
+                    android:enabled="false"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 

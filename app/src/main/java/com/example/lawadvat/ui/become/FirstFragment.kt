@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentFirstBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 
 class FirstFragment : Fragment() {
     lateinit var binding: FragmentFirstBinding
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val user:String=firebaseAuth.currentUser?.displayName.toString()
+    val email1:String=firebaseAuth.currentUser?.email.toString()
     val list = ArrayList<String>()
 
     override fun onCreateView(
@@ -21,6 +25,8 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFirstBinding.inflate(layoutInflater)
+        binding.itemName.setText(user)
+        binding.itemEmail.setText(email1)
         binding.saveBtn.setOnClickListener {
             val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
             if (array != null) {
@@ -38,7 +44,6 @@ class FirstFragment : Fragment() {
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
         if (array!=null) {
-
             initalize(array)
         }
     }
@@ -58,6 +63,8 @@ class FirstFragment : Fragment() {
     }
 
     fun alternative(array:java.util.ArrayList<String>) {
+        val user:String=firebaseAuth.currentUser?.displayName.toString()
+        val email:String=firebaseAuth.currentUser?.email.toString()
         val n = binding.itemName.text.toString()
         val e = binding.itemEmail.text.toString()
         val num = binding.itemNumber.text.toString()
@@ -75,8 +82,8 @@ class FirstFragment : Fragment() {
             }
         }
         val radio: RadioButton = binding.root.findViewById(genderbtn.checkedRadioButtonId)
-        array[0] = n
-        array[1] = e
+        array[0] = n.toString()
+        array[1] = e.toString()
         array[2] = num
         array[3] = c
         array[4]=radio.text.toString()
@@ -91,8 +98,12 @@ class FirstFragment : Fragment() {
     }
 
     private fun in_it() {
-        val name = binding.itemName.text.toString().trim()
-        val email = binding.itemEmail.text.toString().trim()
+        val user = firebaseAuth.currentUser?.displayName.toString()
+        val email1 = firebaseAuth.currentUser?.email.toString()
+        binding.itemName.setText(user)
+        binding.itemEmail.setText(email1)
+        val name=binding.itemName.text.toString()
+        val email = binding.itemEmail.text.toString()
         val phone = binding.itemNumber.text.toString().trim()
         val cnic = binding.itemCnic.text.toString().trim()
         val genderbtn: RadioGroup = binding.radioGroup
@@ -107,11 +118,11 @@ class FirstFragment : Fragment() {
                 }
             }
         }
-        if (name.isEmpty()) {
+        /*if (name.isEmpty()) {
             binding.layoutName.error = "Please fill this field"
         } else if (email.isEmpty()) {
             binding.layoutEmail.error = "Please fill this field"
-        } else if (phone.isEmpty()) {
+        } else*/ if (phone.isEmpty()) {
             binding.layoutNumber.error = "Please fill this field"
         } else if (phone.length > 11) {
             binding.layoutNumber.error = "Invalid Phone number"
@@ -128,8 +139,8 @@ class FirstFragment : Fragment() {
 
         } else {
             val radio: RadioButton = binding.root.findViewById(genderbtn.checkedRadioButtonId)
-            list.add(name)
-            list.add(email)
+            list.add(name.toString())
+            list.add(email.toString())
             list.add(phone)
             list.add(cnic)
             list.add(radio.text.toString())

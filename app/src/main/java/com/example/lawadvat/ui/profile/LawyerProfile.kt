@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.bumptech.glide.Glide
@@ -108,6 +109,7 @@ class LawyerProfile : Fragment() {
         }
 
     }
+
 
     override fun onStart() {
         super.onStart()

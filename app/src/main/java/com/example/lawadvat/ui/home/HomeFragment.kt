@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -65,12 +66,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun get_result() {
-        database = Firebase.database.reference
+        database = FirebaseDatabase.getInstance().getReference("Lawyer")
         val list:ArrayList<Requirement?> = ArrayList()
         database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
-                    val result: Requirement? =postSnapshot.children.first().getValue(Requirement::class.java)!!
+                    val result: Requirement? =postSnapshot.getValue(Requirement::class.java)!!
                     list.add(result)
                     recyclerview_hire(list)
                 }
