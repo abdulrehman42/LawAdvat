@@ -16,9 +16,9 @@
         android:label="@string/Profile"
         tools:layout="@layout/fragment_lawyer_profile" />
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_appointment"
         android:name="com.example.lawadvat.ui.appintment.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_appointment"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/navigation_notifications"

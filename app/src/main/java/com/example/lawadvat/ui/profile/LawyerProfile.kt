@@ -30,6 +30,9 @@ class LawyerProfile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
+        activity?.actionBar?.isShowing
+        activity?.actionBar?.title="Profile"
         binding = FragmentLawyerProfileBinding.inflate(layoutInflater)
         //val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("profile")
         lets_start()
@@ -111,11 +114,6 @@ class LawyerProfile : Fragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
-        activity?.actionBar?.isShowing
-        activity?.actionBar?.title="Profile"
-    }
+
 
 }

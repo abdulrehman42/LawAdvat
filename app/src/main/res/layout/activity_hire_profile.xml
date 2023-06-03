@@ -52,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_height="40dp">
                 <ImageView
-                    android:id="@+id/profile_lawyer_image1"
+                    android:id="@+id/profile_lawyer_image3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"

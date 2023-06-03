@@ -61,6 +61,6 @@ class HireProfile : AppCompatActivity() {
         binding.second1.text="\u25BA"+case2.toString()
         binding.third1.text="\u25BA"+case3.toString()
         binding.fourth1.text="\u25BA"+case4.toString()
-        Glide.with(this).load(img).into(binding.profileLawyerImage1)
+        Glide.with(this).load(img).into(binding.profileLawyerImage3)
     }
 }

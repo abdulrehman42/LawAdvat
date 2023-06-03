@@ -98,12 +98,10 @@ class Splash : AppCompatActivity() {
     fun get_profile()
     {
 
-        databaseRef.child("Lawyer").addValueEventListener(object : ValueEventListener {
+        databaseRef.child("Lawyer").child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                    /*for (postSnapshot in snapshot.children) {*/
-                        for (childsnapshot in snapshot.children) {
                             val result: Requirement? =
-                                childsnapshot.getValue(Requirement::class.java)
+                                snapshot.getValue(Requirement::class.java)
                             if (result?.name == user) {
                                 if (result.layer == true) {
                                     val editor =
@@ -128,8 +126,6 @@ class Splash : AppCompatActivity() {
                                 val intent = Intent(this@Splash, MainActivity::class.java)
                                 startActivity(intent)
                             }
-                        }
-
                         }
 
             override fun onCancelled(error: DatabaseError) {

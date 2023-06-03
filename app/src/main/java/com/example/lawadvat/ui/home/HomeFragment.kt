@@ -52,11 +52,8 @@ class HomeFragment : Fragment() {
         super.onStart()
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-
             update_ui(user)
             get_result()
-
-
             Toast.makeText(requireContext(), user.displayName, Toast.LENGTH_LONG).show()
 
         } else {

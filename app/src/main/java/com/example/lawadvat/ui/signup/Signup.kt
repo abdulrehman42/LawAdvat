@@ -27,7 +27,6 @@ class Signup : AppCompatActivity() {
     lateinit var googleoption:GoogleSignInOptions
     lateinit var googleclient: GoogleSignInClient
     val firebaseAuth1:FirebaseAuth=FirebaseAuth.getInstance()
-    val user=firebaseAuth1.currentUser?.displayName.toString()
     val databaseRef = FirebaseDatabase.getInstance().reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +85,7 @@ class Signup : AppCompatActivity() {
     }
     fun get_profile()
     {
-
+        val user=firebaseAuth1.currentUser?.displayName.toString()
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {

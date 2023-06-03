@@ -78,11 +78,21 @@ class Appointment : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance()
             val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
             val user_img= FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
-            val myRef = database.getReference(user)
-            myRef.setValue(Appoint(name_lawyer =name, lawyer_img = img,fee=fee, lawyer_location = location,client_name = user,client_img = user_img ))
+            val myRef = database.getReference(user).child(name.toString())
+            val myRef1=database.getReference(name.toString()).child(user)
+            myRef.setValue(Appoint(
+                name_lawyer =name, lawyer_img = img,
+                fee =fee, lawyer_location = location,
+                client_name = user,
+                client_img = user_img, check = "false", time ="$hour:$minute:$value", date = date.toString()))
+            myRef1.setValue(Appoint(
+                name_lawyer =name, lawyer_img = img,
+                fee =fee, lawyer_location = location,
+                client_name = user,
+                client_img = user_img, check = "false",
+                time ="$hour:$minute", date = date.toString()))
             Toast.makeText(this, "$hour:$minute$value $date",Toast.LENGTH_SHORT).show()
-
-            //finish()
+            finish()
         }
     }
 
