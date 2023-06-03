@@ -2,6 +2,7 @@ package com.example.lawadvat.ui.appintment.appointment
 
 import android.R
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.lawadvat.databinding.ActivityAppointmentBinding
 import com.example.lawadvat.ui.Variablecontain
+import com.example.lawadvat.ui.home.adapter.lawyers.HireProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.harrywhewell.scrolldatepicker.OnDateSelectedListener
@@ -90,19 +92,14 @@ class Appointment : AppCompatActivity() {
                 fee =fee, lawyer_location = location,
                 client_name = user,
                 client_img = user_img, check = "false",
-                time ="$hour:$minute", date = date.toString()))
+                time ="$hour:$minute:$value", date = date.toString()))
             Toast.makeText(this, "$hour:$minute$value $date",Toast.LENGTH_SHORT).show()
+           /* val intent=Intent(this,HireProfile::class.java)
+            startActivity(intent)*/
             finish()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        val editor =
-            getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
-        editor.putString("date",null)
-        editor.apply()
-    }
     @SuppressLint("SetTextI18n")
     private fun in_it() {
         val name=intent.getStringExtra(Variablecontain.name)

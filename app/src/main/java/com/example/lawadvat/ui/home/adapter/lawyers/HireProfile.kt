@@ -26,6 +26,10 @@ class HireProfile : AppCompatActivity() {
         }
         get_result()
         binding.appointmentBtn.setOnClickListener {
+            val editor =
+                getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+            editor.putString("date",null)
+            editor.apply()
             val name=intent.getStringExtra(Variablecontain.name)
             val img=intent.getStringExtra(Variablecontain.img)
             val location=intent.getStringExtra(Variablecontain.location)

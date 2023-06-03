@@ -1,15 +1,18 @@
 package com.example.lawadvat.ui.profile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentLawyerProfileBinding
@@ -30,17 +33,21 @@ class LawyerProfile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
-        activity?.actionBar?.isShowing
-        activity?.actionBar?.title="Profile"
         binding = FragmentLawyerProfileBinding.inflate(layoutInflater)
-        //val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("profile")
-        lets_start()
-
+        requireActivity().window?.statusBarColor = requireActivity().getColor(R.color.white)
+        requireActivity().actionBar?.isShowing
+        requireActivity().actionBar?.title="Profile"
+        //lets_start(requireContext())
+       /* Handler(Looper.getMainLooper()).postDelayed({
+            lets_start(requireContext())
+        }, 100)*/
+        lets_start(requireContext())
         return binding.root
     }
 
-    private fun lets_start() {
+
+
+    private fun lets_start(context: Context) {
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.displayName.toString()
         database = Firebase.database.reference
@@ -50,15 +57,7 @@ class LawyerProfile : Fragment() {
                     val result: Requirement? =
                         postSnapshot.child(user).getValue(Requirement::class.java)
                     if (result?.layer == true) {
-                        in_it(result)
-                        /*val list=ArrayList<Requirement>()
-                        list.add(result)
-                        val bundle=Bundle()
-                        bundle.putSerializable("profile",list)
-                        val lawyerProfile = LawyerProfile()
-                        lawyerProfile.arguments = bundle*/
-                        /* supportFragmentManager.beginTransaction()
-                            .add(android.R.id.content,LawyerProfile()).commit()*/
+                        in_it(result,context)
                     }
 
                 }
@@ -73,9 +72,9 @@ class LawyerProfile : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun in_it(array: Requirement?) {
+    fun in_it(array: Requirement?, view: Context) {
         if (array != null) {
-            Glide.with(this)
+            Glide.with(view)
                 .load(array.img)
                 .into(binding.profileLawyerImage)
             binding.profileLawyerName.text = array.name.toString()
@@ -90,12 +89,12 @@ class LawyerProfile : Fragment() {
             binding.fee.text=array.fee.toString()+"PKR"
             binding.overview.text=array.description.toString()
 
-            if (array.llm =="") {
-                binding.secondEd.isInvisible = true
-            } else if (array.bar_of_law =="") {
-                binding.thirdEd.isInvisible = true
-            } else if (array.phd == null) {
-                binding.fourthEd.isInvisible = true
+            if (array.llm.equals("null")) {
+                binding.secondEd.isVisible = false
+            } else if (array.bar_of_law.equals("null")) {
+                binding.thirdEd.isVisible = false
+            } else if (array.phd.equals("null")) {
+                binding.fourthEd.isVisible = false
             } else {
                 binding.thirdEd.isInvisible = false
                 binding.thirdEd.text = "\u25BA"+array.bar_of_law.toString()
