@@ -3,6 +3,7 @@ package com.example.lawadvat.ui.appintment.appointment
 import android.R
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.lawadvat.databinding.ActivityAppointmentBinding
 import com.example.lawadvat.ui.Variablecontain
-import com.example.lawadvat.ui.home.adapter.lawyers.HireProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.harrywhewell.scrolldatepicker.OnDateSelectedListener
@@ -53,6 +53,7 @@ class Appointment : AppCompatActivity() {
         }
 
     }
+    @SuppressLint("QueryPermissionsNeeded")
     private fun check_it() {
         val get =
             getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
@@ -93,11 +94,44 @@ class Appointment : AppCompatActivity() {
                 client_name = user,
                 client_img = user_img, check = "false",
                 time ="$hour:$minute:$value", date = date.toString()))
+            send_email()
             Toast.makeText(this, "$hour:$minute$value $date",Toast.LENGTH_SHORT).show()
            /* val intent=Intent(this,HireProfile::class.java)
             startActivity(intent)*/
             finish()
         }
+    }
+
+    @SuppressLint("QueryPermissionsNeeded")
+    private fun send_email() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("abdulrehman4241566@gmail.com")
+            putExtra(Intent.EXTRA_EMAIL, "aligee5716@gmail.com")
+            putExtra(Intent.EXTRA_SUBJECT, "Appointment")
+            putExtra(Intent.EXTRA_TEXT, "Hey Abdul rehman")
+        }
+        val packageManager = this.packageManager
+        val activities = packageManager.queryIntentActivities(intent, 0)
+
+        if (activities.isNotEmpty()) {
+            val chooserIntent = Intent.createChooser(intent, "Send Email")
+            startActivity(chooserIntent)
+        } else {
+            val webIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:aligee5716@gmail.com?subject=${Uri.encode("Appointment")}&body=${Uri.encode("Hey Abdul rehman")}")
+            }
+            if (webIntent.resolveActivity(packageManager) != null) {
+                startActivity(webIntent)
+            } else {
+                Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show()
+            }
+        }
+       /* val chooserIntent = Intent.createChooser(intent, "Send Email")
+        if (intent.resolveActivity(this.packageManager) != null) {
+            startActivity(chooserIntent)
+        } else {
+            Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show()
+        }*/
     }
 
     @SuppressLint("SetTextI18n")
