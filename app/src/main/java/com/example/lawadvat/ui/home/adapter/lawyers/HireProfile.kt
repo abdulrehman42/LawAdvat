@@ -5,13 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.example.lawadvat.R
 import com.example.lawadvat.databinding.ActivityHireProfileBinding
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.appintment.appointment.Appointment
-import com.example.lawadvat.ui.become.entity.Requirement
-import java.io.Serializable
-import java.util.ArrayList
+import com.example.lawadvat.ui.messege.ChatActivity
 
 class HireProfile : AppCompatActivity() {
     lateinit var binding:ActivityHireProfileBinding
@@ -33,13 +30,20 @@ class HireProfile : AppCompatActivity() {
             val name=intent.getStringExtra(Variablecontain.name)
             val img=intent.getStringExtra(Variablecontain.img)
             val location=intent.getStringExtra(Variablecontain.location)
-            val exp=intent.getStringExtra(Variablecontain.exp)
             val fee=intent.getStringExtra(Variablecontain.fee)
             val intent=Intent(this, Appointment::class.java)
             intent.putExtra(Variablecontain.name,name)
             intent.putExtra(Variablecontain.img,img)
             intent.putExtra(Variablecontain.location,location)
             intent.putExtra(Variablecontain.fee,fee)
+            startActivity(intent)
+        }
+        binding.msgBtn.setOnClickListener {
+            val layer_id=intent.getStringExtra(Variablecontain.id)
+            val name=intent.getStringExtra(Variablecontain.name)
+            val intent=Intent(this,ChatActivity::class.java)
+            intent.putExtra(Variablecontain.name,name)
+            intent.putExtra(Variablecontain.id,layer_id)
             startActivity(intent)
         }
     }

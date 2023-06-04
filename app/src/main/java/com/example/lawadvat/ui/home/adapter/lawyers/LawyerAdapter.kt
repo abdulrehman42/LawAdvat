@@ -62,6 +62,7 @@ class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):Recy
             intent.putExtra(Variablecontain.case2,l?.second_specilize)
             intent.putExtra(Variablecontain.case3,l?.third_specilize)
             intent.putExtra(Variablecontain.case4,l?.fourth_specilize)
+            intent.putExtra(Variablecontain.id,l?.id)
             context.startActivity(intent)
         }
     }

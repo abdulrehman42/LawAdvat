@@ -12,6 +12,7 @@ class Variablecontain {
         val case3="case3"
         val case4="case4"
         val fee="fee"
+        val id="id"
 
 
     }

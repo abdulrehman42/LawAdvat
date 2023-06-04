@@ -76,10 +76,10 @@ class DashboardFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun recyclerview(list: ArrayList<Appoint?>) {
-        if (!isAdded)
+      /*  if (!isAdded)
         {
             Toast.makeText(activity,"not added",Toast.LENGTH_SHORT).show()
-        }
+        }*/
         val adapter=AppointmentAdpter(requireActivity(),list)
         binding.recyclerviewAppointment.setHasFixedSize(true)
         binding.recyclerviewAppointment.layoutManager = LinearLayoutManager(

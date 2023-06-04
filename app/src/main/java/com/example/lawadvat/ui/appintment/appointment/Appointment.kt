@@ -94,7 +94,7 @@ class Appointment : AppCompatActivity() {
                 client_name = user,
                 client_img = user_img, check = "false",
                 time ="$hour:$minute:$value", date = date.toString()))
-            send_email()
+           // send_email()
             Toast.makeText(this, "$hour:$minute$value $date",Toast.LENGTH_SHORT).show()
            /* val intent=Intent(this,HireProfile::class.java)
             startActivity(intent)*/

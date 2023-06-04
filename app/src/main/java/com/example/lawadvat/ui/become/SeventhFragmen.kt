@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class SeventhFragmen : Fragment() {
     lateinit var binding: FragmentSeventhBinding
-
+    val user_id=FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -127,19 +127,19 @@ class SeventhFragmen : Fragment() {
         val myRef = database.getReference("Lawyer").child(user)
         if (array[20].isEmpty()){
             myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = null, bar_of_law = array[21], phd = array[22],layer = true))
+                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = null, bar_of_law = array[21], phd = array[22], id = user_id,layer = true))
         }else if (array[21].isEmpty()){
             myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = null, phd = array[22],layer = true))
+                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = null, phd = array[22], id = user_id,layer = true))
         }else if (array[22].isEmpty())
         {
             myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = null,layer = true))
+                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = null, id = user_id,layer = true))
         }
         else
         {
             myRef.setValue(Requirement(img =user_img,name = array[0], email = array[1], phone = array[2],cnic = array[3], gender = array[4],
-                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22],layer = true))
+                country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22], id = user_id,layer = true))
         }
          val editor =
             requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
@@ -175,20 +175,20 @@ class SeventhFragmen : Fragment() {
             binding.itemProvince.setText(array1[6])
             binding.itemCity.setText(array1[7])
             binding.itemLocation.setText(array1[8])
-            binding.itemGeneral.setText(array1[9].toString())
-            binding.itemHigh.setText(array1[10].toString())
-            binding.itemSupreme.setText(array1[11].toString())
-            binding.itemDesc.setText(array1.get(12).toString())
-            binding.itemExperience.setText(array1.get(13).toString())
-            binding.itemFee.setText(array1.get(14).toString())
-            binding.itemFirst.setText(array1.get(15).toString())
-            binding.itemSecond.setText(array1.get(16).toString())
-            binding.itemThird.setText(array1.get(17).toString())
-            binding.itemForth.setText(array1.get(18).toString())
-            binding.itemFirststudy.setText(array1.get(19).toString())
-            binding.itemSecondstudy.setText(array1.get(20).toString())
-            binding.itemThirdstudy.setText(array1.get(21).toString())
-            binding.itemForthstudy.setText(array1.get(22).toString())
+            binding.itemGeneral.setText(array1[9])
+            binding.itemHigh.setText(array1[10])
+            binding.itemSupreme.setText(array1[11])
+            binding.itemDesc.setText(array1[12])
+            binding.itemExperience.setText(array1[13])
+            binding.itemFee.setText(array1[14])
+            binding.itemFirst.setText(array1[15])
+            binding.itemSecond.setText(array1[16])
+            binding.itemThird.setText(array1[17])
+            binding.itemForth.setText(array1[18])
+            binding.itemFirststudy.setText(array1[19])
+            binding.itemSecondstudy.setText(array1[20])
+            binding.itemThirdstudy.setText(array1[21])
+            binding.itemForthstudy.setText(array1[22])
         }
     }
 }
