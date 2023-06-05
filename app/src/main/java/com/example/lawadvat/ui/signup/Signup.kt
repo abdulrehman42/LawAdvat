@@ -27,7 +27,7 @@ class Signup : AppCompatActivity() {
     lateinit var googleoption:GoogleSignInOptions
     lateinit var googleclient: GoogleSignInClient
     val firebaseAuth1:FirebaseAuth=FirebaseAuth.getInstance()
-    val databaseRef = FirebaseDatabase.getInstance().reference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySignupBinding.inflate(layoutInflater)
@@ -52,6 +52,7 @@ class Signup : AppCompatActivity() {
         startActivityForResult(intent,100)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==100)
@@ -67,7 +68,8 @@ class Signup : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Successfully login", Toast.LENGTH_LONG).show()
-                            get_profile()
+                           val user= task.result.user?.displayName.toString()
+                            get_profile(user)
                             /*val intent=Intent(this,MainActivity::class.java)
                             startActivity(intent)*/
                         } else {
@@ -83,14 +85,13 @@ class Signup : AppCompatActivity() {
             }
         }
     }
-    fun get_profile()
+    fun get_profile(user: String)
     {
-        val user=firebaseAuth1.currentUser?.displayName.toString()
-        databaseRef.addValueEventListener(object : ValueEventListener {
+        val databaseRef = FirebaseDatabase.getInstance().reference
+        databaseRef.child("Lawyer").child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
                     val result: Requirement? =
-                        postSnapshot.child(user).getValue(Requirement::class.java)
+                        snapshot.getValue(Requirement::class.java)
                     if (result?.layer == true) {
                         val editor =
                             getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
@@ -107,7 +108,6 @@ class Signup : AppCompatActivity() {
                         val intent = Intent(this@Signup, MainActivity::class.java)
                         startActivity(intent)
                     }
-                }
             }
 
             override fun onCancelled(error: DatabaseError) {

@@ -8,12 +8,9 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lawadvat.databinding.ActivityChatBinding
 import com.example.lawadvat.ui.Variablecontain
-import com.example.lawadvat.ui.appintment.adapter.AppointmentAdpter
-import com.example.lawadvat.ui.appintment.appointment.Appoint
 import com.example.lawadvat.ui.messege.adapter.MessegeAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -27,6 +24,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var binding:ActivityChatBinding
     val user=FirebaseAuth.getInstance().currentUser?.displayName.toString()
     val user_id=FirebaseAuth.getInstance().currentUser?.uid.toString()
+    var num=0
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +37,14 @@ class ChatActivity : AppCompatActivity() {
             if (messege.isNotEmpty())
             {
                 val time=LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-                msg_send(layer_id,messege,time)
+                msg_send(layer_id,name,messege,time)
             }
             else{
                 Toast.makeText(this,"messege not send",Toast.LENGTH_SHORT).show()
             }
             Handler(Looper.getMainLooper()).postDelayed({
                 in_it()
+                //lawyer_value()
             },100)
 
         }
@@ -55,19 +54,24 @@ class ChatActivity : AppCompatActivity() {
         super.onStart()
         in_it()
     }
-    private fun first_check() {
-        val database=FirebaseDatabase.getInstance().reference
+    private fun lawyer_value() {
+        val layer_id=intent.getStringExtra(Variablecontain.id)
+        val name=intent.getStringExtra(Variablecontain.name)
+        val database=FirebaseDatabase.getInstance().getReference(layer_id.toString()).child(name.toString())
         val list:ArrayList<Messege?> = ArrayList()
         database.child(user_id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    /*for (postSnapshot in snapshot.children) {*/
-                    val result: Messege? =snapshot.getValue(Messege::class.java)
-                    list.add(result)
-                    recyclerview(list)
-                }else{
-                    Toast.makeText(this@ChatActivity,"data not found",Toast.LENGTH_SHORT).show()
-                }
+                if (snapshot.exists()) {
+                    for (postSnapshot in snapshot.children) {
+                        val result: Messege? = snapshot.getValue(Messege::class.java)
+                        list.add(result)
+                        recyclerview(list)
+                    }
+                    }else{
+                        Toast.makeText(this@ChatActivity, "data not found", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -90,16 +94,20 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun in_it() {
-        val database=FirebaseDatabase.getInstance().getReference(user_id)
+        //val layer_id=intent.getStringExtra(Variablecontain.id)
+        val name=intent.getStringExtra(Variablecontain.name)
+        val database=FirebaseDatabase.getInstance().getReference(user_id).child(name.toString())
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list= ArrayList<Messege?>()
                 if (snapshot.exists()){
+                    num= snapshot.childrenCount.toInt()
                     for (postSnapshot in snapshot.children) {
-                        val result: Messege? = snapshot.getValue(Messege::class.java)
+                        val result: Messege? = postSnapshot.getValue(Messege::class.java)
                         list.add(result)
+                        recyclerview(list)
                     }
-                    recyclerview(list)
+
                 }else{
                     Toast.makeText(this@ChatActivity,"data not found",Toast.LENGTH_SHORT).show()
                 }
@@ -111,11 +119,10 @@ class ChatActivity : AppCompatActivity() {
     })
     }
 
-    private fun msg_send(layerId: String?, messege: String, time: String) {
+    private fun msg_send(layerId: String?, name: String?, messege: String, time: String) {
         val database=FirebaseDatabase.getInstance().reference
-        val messegelist=ArrayList<Messege?>()
-        messegelist.add(Messege(sender_name = user,text = messege, time = time))
-        database.child(layerId.toString()).setValue(messegelist)
-        database.child(user_id).setValue(messegelist)
+       val messege=Messege(sender_name = user, sender_id = user_id, reciver_id = layerId,text = messege, time = time)
+        database.child(user_id).child(name.toString()).child((num+1).toString()).setValue(messege)
+        database.child(layerId.toString()).child(user).child((num+1).toString()).setValue(messege)
     }
 }

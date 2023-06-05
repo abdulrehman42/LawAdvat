@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.lawadvat.ui.messege.NotificationsFragment"
+        android:name="com.example.lawadvat.ui.messege.MessegeFragment"
         android:label="@string/title_messege"
         tools:layout="@layout/fragment_notifications" />
     <fragment

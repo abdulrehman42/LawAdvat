@@ -53,9 +53,10 @@ class DashboardFragment : Fragment() {
     }*/
     private fun in_it() {
         val database=FirebaseDatabase.getInstance().reference
-        val list:ArrayList<Appoint?> = ArrayList()
+        val list=ArrayList<Appoint?>()
         database.child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
                 if (snapshot.exists()){
                 for (postSnapshot in snapshot.children) {
                         val result: Appoint? =postSnapshot.getValue(Appoint::class.java)
