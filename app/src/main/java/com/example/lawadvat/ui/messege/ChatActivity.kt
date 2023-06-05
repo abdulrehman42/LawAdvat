@@ -96,8 +96,9 @@ class ChatActivity : AppCompatActivity() {
     private fun in_it() {
         //val layer_id=intent.getStringExtra(Variablecontain.id)
         val name=intent.getStringExtra(Variablecontain.name)
-        val database=FirebaseDatabase.getInstance().getReference(user_id).child(name.toString())
-        database.addValueEventListener(object : ValueEventListener {
+
+        val database=FirebaseDatabase.getInstance().getReference(user_id)
+        database.child(name.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list= ArrayList<Messege?>()
                 if (snapshot.exists()){
@@ -120,9 +121,11 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun msg_send(layerId: String?, name: String?, messege: String, time: String) {
+        val sender_id=intent.getStringExtra(Variablecontain.sender_id)
+        val reciver_id=intent.getStringExtra(Variablecontain.reciver_id)
         val database=FirebaseDatabase.getInstance().reference
        val messege=Messege(sender_name = user, sender_id = user_id, reciver_id = layerId,text = messege, time = time)
         database.child(user_id).child(name.toString()).child((num+1).toString()).setValue(messege)
-        database.child(layerId.toString()).child(user).child((num+1).toString()).setValue(messege)
+        database.child(sender_id.toString()).child(user).child((num+1).toString()).setValue(messege)
     }
 }

@@ -9,7 +9,10 @@ import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.ui.messege.Messege
 import android.content.Context
+import android.content.Intent
 import android.widget.ImageView
+import com.example.lawadvat.ui.Variablecontain
+import com.example.lawadvat.ui.messege.ChatActivity
 
 class ChatmainAdapter(val context: Context, val list: ArrayList<Messege?>):RecyclerView.Adapter<ChatmainAdapter.ViewHolder>() {
     class ViewHolder(val view:View):RecyclerView.ViewHolder(view){
@@ -32,5 +35,12 @@ class ChatmainAdapter(val context: Context, val list: ArrayList<Messege?>):Recyc
         Glide.with(context)
             .load(l?.sender_image)
             .into(holder.image)
+        holder.itemView.setOnClickListener {
+            val intent=Intent(context,ChatActivity::class.java)
+            intent.putExtra(Variablecontain.name,l?.sender_name)
+            intent.putExtra(Variablecontain.sender_id,l?.sender_id)
+            intent.putExtra(Variablecontain.sender_id,l?.reciver_id)
+            context.startActivity(intent)
+        }
     }
 }
