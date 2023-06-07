@@ -9,7 +9,7 @@
         android:layout_gravity="top"
         android:id="@+id/lawyer_appointmen_cardview"
         app:cardCornerRadius="15dp"
-        android:layout_margin="05dp">
+        android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

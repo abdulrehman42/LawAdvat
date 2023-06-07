@@ -10,6 +10,8 @@
         android:id="@+id/chat_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,11 +31,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:background="@drawable/custom_round"
+        android:padding="10dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
@@ -47,7 +55,9 @@
                     android:layout_height="wrap_content"
                     android:padding="05dp"
                     android:fontFamily="serif"
+                    android:background="@drawable/simple_round"
                     android:hint="send messege"
+                    android:gravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/send_message_vector"
                     app:layout_constraintStart_toStartOf="parent"
@@ -61,9 +71,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_send_24" />
+                    app:srcCompat="@drawable/send" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

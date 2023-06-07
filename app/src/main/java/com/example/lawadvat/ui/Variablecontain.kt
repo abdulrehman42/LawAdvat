@@ -15,6 +15,7 @@ class Variablecontain {
         val id="id"
         val sender_id="sender"
         val reciver_id="reciver"
+        val reciver_img="img"
 
 
     }

@@ -41,9 +41,11 @@ class HireProfile : AppCompatActivity() {
         binding.msgBtn.setOnClickListener {
             val layer_id=intent.getStringExtra(Variablecontain.id)
             val name=intent.getStringExtra(Variablecontain.name)
+            val img=intent.getStringExtra(Variablecontain.img)
             val intent=Intent(this,ChatActivity::class.java)
             intent.putExtra(Variablecontain.name,name)
             intent.putExtra(Variablecontain.id,layer_id)
+            intent.putExtra(Variablecontain.img,img)
             startActivity(intent)
         }
     }

@@ -13,15 +13,19 @@ import android.content.Intent
 import android.widget.ImageView
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.messege.ChatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class ChatmainAdapter(val context: Context, val list: ArrayList<Messege?>):RecyclerView.Adapter<ChatmainAdapter.ViewHolder>() {
-    class ViewHolder(val view:View):RecyclerView.ViewHolder(view){
-        val name=view.findViewById<TextView>(R.id.chatuser_name)
-        val image=view.findViewById<ImageView>(R.id.chatuser_img)
+    val user = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val name = view.findViewById<TextView>(R.id.chatuser_name)
+        val image = view.findViewById<ImageView>(R.id.chatuser_img)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layout=LayoutInflater.from(parent.context).inflate(R.layout.custom_chatlistview,parent,false)
+        val layout =
+            LayoutInflater.from(parent.context).inflate(R.layout.custom_chatlistview, parent, false)
         return ViewHolder(layout)
     }
 
@@ -30,17 +34,35 @@ class ChatmainAdapter(val context: Context, val list: ArrayList<Messege?>):Recyc
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val l=list[position]
-        holder.name.text=l?.sender_name.toString()
-        Glide.with(context)
-            .load(l?.sender_image)
-            .into(holder.image)
-        holder.itemView.setOnClickListener {
-            val intent=Intent(context,ChatActivity::class.java)
-            intent.putExtra(Variablecontain.name,l?.sender_name)
-            intent.putExtra(Variablecontain.sender_id,l?.sender_id)
-            intent.putExtra(Variablecontain.sender_id,l?.reciver_id)
-            context.startActivity(intent)
+        val l = list[position]
+        if (l != null) {
+            if (l.sender_id == user) {
+                holder.name.text = l.reciver_name.toString()
+                Glide.with(context)
+                    .load(l?.reciver_image)
+                    .into(holder.image)
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(context, ChatActivity::class.java)
+                    intent.putExtra(Variablecontain.name, l?.reciver_name)
+                    intent.putExtra(Variablecontain.sender_id, l?.sender_id)
+                    intent.putExtra(Variablecontain.reciver_id, l?.reciver_id)
+                    intent.putExtra(Variablecontain.img,l.sender_image)
+                    intent.putExtra(Variablecontain.reciver_img,l.reciver_image)
+                    context.startActivity(intent)
+                }
+            } else {
+                holder.name.text = l.sender_name.toString()
+                Glide.with(context)
+                    .load(l.sender_image)
+                    .into(holder.image)
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(context, ChatActivity::class.java)
+                    intent.putExtra(Variablecontain.name, l?.sender_name)
+                    intent.putExtra(Variablecontain.sender_id, l?.sender_id)
+                    intent.putExtra(Variablecontain.reciver_id, l?.reciver_id)
+                    context.startActivity(intent)
+                }
+            }
         }
     }
 }

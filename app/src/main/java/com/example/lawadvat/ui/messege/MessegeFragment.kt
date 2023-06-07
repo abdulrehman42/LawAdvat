@@ -25,7 +25,7 @@ class MessegeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
+        activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
        /* val notificationsViewModel =
                 ViewModelProvider(this).get(NotificationsViewModel::class.java)*/
         binding = FragmentNotificationsBinding.inflate(layoutInflater)
