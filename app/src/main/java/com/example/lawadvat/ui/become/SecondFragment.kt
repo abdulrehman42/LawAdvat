@@ -175,7 +175,10 @@ class SecondFragment : Fragment() {
                         requireContext(),
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
-                ) {
+                ){
+                    return
+                }
+                    /*{
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
                     // here to request the missing permissions, and then overriding
@@ -184,7 +187,7 @@ class SecondFragment : Fragment() {
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
                     return
-                }
+                }*/
                 mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
                     val location: Location? = task.result
 /*
@@ -194,7 +197,6 @@ class SecondFragment : Fragment() {
                         finish()
                     }, task.isComplete as Long)
 */
-
                     if (location != null) {
                         val geocoder = Geocoder(requireContext(), Locale.getDefault())
                         val list: List<Address> =

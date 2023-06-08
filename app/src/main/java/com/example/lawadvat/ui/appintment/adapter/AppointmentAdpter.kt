@@ -17,14 +17,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lawadvat.R
-import com.example.lawadvat.ui.appintment.DashboardFragment
 import com.example.lawadvat.ui.appintment.appointment.Appoint
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 
-class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
+class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
     RecyclerView.Adapter<AppointmentAdpter.ViewHolder>() {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val user = firebaseAuth.currentUser?.displayName.toString()
@@ -84,7 +82,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.fee1.text = "fee:" + l.fee.toString() + "PKR"
                 holder.time1.text = l.time.toString()
                 holder.date1.text = l?.date.toString()
-                Glide.with(context).load(l?.client_img).into(holder.image1)
+                if (context != null) {
+                    Glide.with(context).load(l?.client_img).into(holder.image1)
+                }
             } else if (l.check.equals("reject")) {
                 holder.client_card.isVisible = false
                 holder.linear_client.isVisible = false
@@ -97,7 +97,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.fee1.text = "fee:" + l?.fee.toString() + "PKR"
                 holder.time1.text = l?.time.toString()
                 holder.date1.text = l?.date.toString()
-                Glide.with(context).load(l?.client_img).into(holder.image1)
+                if (context != null) {
+                    Glide.with(context).load(l?.client_img).into(holder.image1)
+                }
             } else {
                 holder.client_card.isVisible = false
                 holder.linear_client.isVisible = false
@@ -110,7 +112,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.fee1.text = "fee:" + l?.fee.toString() + "PKR"
                 holder.time1.text = l?.time.toString()
                 holder.date1.text = l?.date.toString()
-                Glide.with(context).load(l?.client_img).into(holder.image1)
+                if (context != null) {
+                    Glide.with(context).load(l?.client_img).into(holder.image1)
+                }
 
             }
 
@@ -126,7 +130,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.date.text = l.date.toString()
                 holder.btnpending.text = "Accepted"
                 holder.btnpending.setBackgroundColor(R.color.green)
-                Glide.with(context).load(l.lawyer_img).into(holder.image2)
+                if (context != null) {
+                    Glide.with(context).load(l.lawyer_img).into(holder.image2)
+                }
             } else if (l.check.equals("reject")) {
                 holder.card_lawyer.isVisible = false
                 holder.linear_lawyer.isVisible = false
@@ -138,7 +144,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.date.text = l?.date.toString()
                 holder.btnpending.text = "Rejected"
                 holder.btnpending.setBackgroundColor(R.color.red)
-                Glide.with(context).load(l?.lawyer_img).into(holder.image2)
+                if (context != null) {
+                    Glide.with(context).load(l?.lawyer_img).into(holder.image2)
+                }
             } else {
                 holder.card_lawyer.isVisible = false
                 holder.linear_lawyer.isVisible = false
@@ -149,7 +157,9 @@ class AppointmentAdpter(val context: Context, var list: ArrayList<Appoint?>) :
                 holder.time.text = l?.time.toString()
                 holder.btnpending.text = "pending"
                 holder.date.text = l?.date.toString()
-                Glide.with(context).load(l?.lawyer_img).into(holder.image2)
+                if (context != null) {
+                    Glide.with(context).load(l?.lawyer_img).into(holder.image2)
+                }
             }
         }
         holder.accept_btn.setOnClickListener {

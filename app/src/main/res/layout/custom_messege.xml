@@ -7,8 +7,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="10dp"
+        android:backgroundTint="#FFFFFF"
         android:background="@drawable/msg_round"
         android:layout_gravity="start"
         android:layout_margin="05dp"
@@ -17,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hey"
+            android:layout_margin="02dp"
             android:maxLines="8"
             android:textSize="14sp"
             android:layout_gravity="left"
@@ -25,9 +27,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="time"
+            android:layout_margin="02dp"
             android:textSize="10sp"
+
             android:layout_gravity="bottom"
-            android:id="@+id/reciver_time"/>
+            android:id="@+id/reciver_time"
+            tools:ignore="HardcodedText,SmallSp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

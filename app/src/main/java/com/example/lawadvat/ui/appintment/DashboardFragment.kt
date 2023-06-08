@@ -1,10 +1,7 @@
 package com.example.lawadvat.ui.appintment
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,10 +78,10 @@ class DashboardFragment : Fragment() {
         {
             Toast.makeText(activity,"not added",Toast.LENGTH_SHORT).show()
         }*/
-        val adapter=AppointmentAdpter(requireActivity(),list)
+        val adapter=AppointmentAdpter(context,list)
         binding.recyclerviewAppointment.setHasFixedSize(true)
         binding.recyclerviewAppointment.layoutManager = LinearLayoutManager(
-            requireContext(),
+            context,
             LinearLayoutManager.VERTICAL,
             true
         )

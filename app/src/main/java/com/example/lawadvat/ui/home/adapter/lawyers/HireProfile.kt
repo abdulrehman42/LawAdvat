@@ -45,7 +45,7 @@ class HireProfile : AppCompatActivity() {
             val intent=Intent(this,ChatActivity::class.java)
             intent.putExtra(Variablecontain.name,name)
             intent.putExtra(Variablecontain.id,layer_id)
-            intent.putExtra(Variablecontain.img,img)
+            intent.putExtra(Variablecontain.img2,img)
             startActivity(intent)
         }
     }

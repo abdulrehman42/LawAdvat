@@ -51,16 +51,19 @@ class LawyerProfile : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser?.displayName.toString()
         database = Firebase.database.reference
-        database.addValueEventListener(object : ValueEventListener {
+        database.child("Lawyer").child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val result: Requirement? =
-                        postSnapshot.child(user).getValue(Requirement::class.java)
-                    if (result?.layer == true) {
-                        in_it(result,context)
+               /* for (postSnapshot in snapshot.children) {*/
+                    if (snapshot.exists()){
+                        val result: Requirement? =
+                            snapshot.getValue(Requirement::class.java)
+                        if (result?.layer == true) {
+                            in_it(result,context)
+                        }
+                    }else{
+                        Toast.makeText(requireContext(),"Not found lawyer data", Toast.LENGTH_SHORT).show()
                     }
-
-                }
+                //}
 
             }
 

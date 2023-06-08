@@ -39,10 +39,6 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val layer_id = intent.getStringExtra(Variablecontain.id)
-        val name = intent.getStringExtra(Variablecontain.name)
-        val img = intent.getStringExtra(Variablecontain.img)
-        val reciver_img = intent.getStringExtra(Variablecontain.reciver_img)
         this.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.custom_actionbar)
@@ -57,8 +53,29 @@ class ChatActivity : AppCompatActivity() {
             Glide.with(this).load(img).into(actionimg)
 
         }else{*/
+        val layer_id = intent.getStringExtra(Variablecontain.id)
+        val name = intent.getStringExtra(Variablecontain.name)
+        val img = intent.getStringExtra(Variablecontain.img2)
+        val reciver_img = intent.getStringExtra(Variablecontain.reciver_img)
         nametext.text = name.toString()
-        Glide.with(this).load(reciver_img).into(actionimg)
+        if (reciver_img==user_pic){
+            if (img!=null)
+            {
+                Glide.with(this).load(img).into(actionimg)
+            }
+            else{
+                Glide.with(this).load(reciver_img).into(actionimg)
+            }
+
+        }else{
+            if (img!=null)
+            {
+                Glide.with(this).load(img).into(actionimg)
+            }
+            else{
+                Glide.with(this).load(reciver_img).into(actionimg)
+            }
+        }
         val reciver_id = intent.getStringExtra(Variablecontain.reciver_id)
         binding.sendMessageVector.setOnClickListener {
             val messege = binding.sendMesssage.text.toString()
@@ -89,7 +106,7 @@ class ChatActivity : AppCompatActivity() {
             binding.sendMesssage.setText("")
             Handler(Looper.getMainLooper()).postDelayed({
                 in_it()
-                //lawyer_value()
+
             }, 100)
 
         }
@@ -98,34 +115,6 @@ class ChatActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         in_it()
-    }
-
-    private fun lawyer_value() {
-        val layer_id = intent.getStringExtra(Variablecontain.id)
-        val name = intent.getStringExtra(Variablecontain.name)
-        val database =
-            FirebaseDatabase.getInstance().getReference(layer_id.toString()).child(name.toString())
-        val list: ArrayList<Messege?> = ArrayList()
-        database.child(user_id).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (postSnapshot in snapshot.children) {
-                        val result: Messege? = snapshot.getValue(Messege::class.java)
-                        list.add(result)
-                        recyclerview(list)
-                    }
-                } else {
-                    Toast.makeText(this@ChatActivity, "data not found", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ChatActivity, "What's wrong with you", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -176,7 +165,6 @@ class ChatActivity : AppCompatActivity() {
         time: String
     ) {
         val sender_id = intent.getStringExtra(Variablecontain.sender_id)
-
         val database = FirebaseDatabase.getInstance().reference
         val current_user = Messege(
             sender_name = user,
@@ -189,9 +177,19 @@ class ChatActivity : AppCompatActivity() {
             time = time
         )
         //      val reciver_side=Messege(sender_name = name, sender_id = user_id, reciver_id = layerId,text = messege, time = time)
-        database.child(user_id).child(name.toString()).child((num + 1).toString())
-            .setValue(current_user)
-        database.child(layerId.toString()).child(user).child((num + 1).toString())
-            .setValue(current_user)
+        if (sender_id!=null && sender_id!=user_id)
+        {
+            database.child(user_id).child(name.toString()).child((num + 1).toString())
+                .setValue(current_user)
+            database.child(sender_id.toString()).child(user).child((num + 1).toString())
+                .setValue(current_user)
+        }else
+        {
+            database.child(user_id).child(name.toString()).child((num + 1).toString())
+                .setValue(current_user)
+            database.child(layerId.toString()).child(user).child((num + 1).toString())
+                .setValue(current_user)
+        }
+
     }
 }
