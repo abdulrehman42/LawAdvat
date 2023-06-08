@@ -129,7 +129,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 holder.time.text = l.time.toString()
                 holder.date.text = l.date.toString()
                 holder.btnpending.text = "Accepted"
-                holder.btnpending.setBackgroundColor(R.color.green)
+                holder.btnpending.setBackgroundColor(R.color.red)
                 if (context != null) {
                     Glide.with(context).load(l.lawyer_img).into(holder.image2)
                 }
@@ -143,7 +143,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 holder.time.text = l?.time.toString()
                 holder.date.text = l?.date.toString()
                 holder.btnpending.text = "Rejected"
-                holder.btnpending.setBackgroundColor(R.color.red)
+                holder.btnpending.setBackgroundColor(R.color.black)
                 if (context != null) {
                     Glide.with(context).load(l?.lawyer_img).into(holder.image2)
                 }

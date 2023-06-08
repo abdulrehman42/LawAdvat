@@ -29,6 +29,7 @@ import java.time.format.DateTimeFormatter
 
 class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
+    val list = ArrayList<Messege?>()
     val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
     val user_id = FirebaseAuth.getInstance().currentUser?.uid.toString()
     val user_pic = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
@@ -136,7 +137,7 @@ class ChatActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance().getReference(user_id)
         database.child(name.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val list = ArrayList<Messege?>()
+
                 if (snapshot.exists()) {
                     num = snapshot.childrenCount.toInt()
                     for (postSnapshot in snapshot.children) {
