@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentFifthBinding
 
@@ -90,6 +91,9 @@ class FifthFragment : Fragment() {
             ?.commit()
     }
     fun alternative(array:java.util.ArrayList<String>) {
+        /*val items = listOf("Murder", "Assault", "Theft", "Robbery", "Offenses","Fraud","Cybercrime","Kidnapping","Personal Injury","Property Disputes","Contract Disputes","Family Law","Divorce","Child Custody","Child Suppor","Adoption","Domestic Violence","Immigration Appeals","Regulatory Compliance","Tax Appeals","Government Agency Disputes","Civil Rights Violations","Freedom of Speech","Employment Law","Pollution","Climate Change","Environmental Cleanup")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
+        binding.itemFirst.setadpter(adapter)*/
         val n = binding.itemFirst.text.toString()
         val e = binding.itemSecond.text.toString()
         val num = binding.itemThird.text.toString()

@@ -17,7 +17,6 @@ class Variablecontain {
         val reciver_id="reciver"
         val reciver_img="img"
         val img2="img2"
-
-
+        val data="object"
     }
 }
