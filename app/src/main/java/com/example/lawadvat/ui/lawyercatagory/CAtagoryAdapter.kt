@@ -33,7 +33,7 @@ class CAtagoryAdapter(val context: Context,val list:ArrayList<Services>):Recycle
         val l=list[position]
         holder.name.text=l.name
         holder.image.setImageResource(l.img)
-        l.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val intent= Intent(context,Subcatagory::class.java)
             context.startActivity(intent)
         }
