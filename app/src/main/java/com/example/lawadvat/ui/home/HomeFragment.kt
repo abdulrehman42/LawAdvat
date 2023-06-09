@@ -19,6 +19,7 @@ import com.example.lawadvat.ui.become.entity.Requirement
 import com.example.lawadvat.ui.home.adapter.ListItem
 import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
 import com.example.lawadvat.ui.home.adapter.lawyers.LawyerAdapter
+import com.example.lawadvat.ui.lawyercatagory.CatagoryLawyer
 import com.example.lawadvat.ui.signup.Signup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -45,6 +46,10 @@ class HomeFragment : Fragment() {
         val homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding.btnSpecifiction.setOnClickListener{
+            val intent=Intent(requireContext(),CatagoryLawyer::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
@@ -97,7 +102,7 @@ class HomeFragment : Fragment() {
         binding.specificationRecyclerview.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.HORIZONTAL,
-            true
+            false
         )
         binding.specificationRecyclerview.adapter = adapter
 

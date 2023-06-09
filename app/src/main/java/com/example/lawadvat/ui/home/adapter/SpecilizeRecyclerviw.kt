@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lawadvat.R
 
-class SpecilizeRecyclerviw(val context:Context, private val list:ArrayList<Services>):RecyclerView.Adapter<SpecilizeRecyclerviw.ViewHolder>() {
+class SpecilizeRecyclerviw(val context:Context, val list:ArrayList<Services>):RecyclerView.Adapter<SpecilizeRecyclerviw.ViewHolder>() {
     class ViewHolder(view:View):RecyclerView.ViewHolder(view)
     {
         val name=view.findViewById<TextView>(R.id.name_item)

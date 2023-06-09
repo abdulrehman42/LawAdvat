@@ -20,6 +20,12 @@
         android:theme="@style/Theme.LawAdvat"
         tools:targetApi="31">
         <activity
+            android:name=".ui.lawyercatagory.subcatagory.Subcatagory"
+            android:exported="false" />
+        <activity
+            android:name=".ui.lawyercatagory.CatagoryLawyer"
+            android:exported="false" />
+        <activity
             android:name=".ui.messege.ChatActivity"
             android:exported="false" />
         <activity
