@@ -20,6 +20,7 @@ import com.example.lawadvat.ui.home.adapter.ListItem
 import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
 import com.example.lawadvat.ui.home.adapter.lawyers.LawyerAdapter
 import com.example.lawadvat.ui.lawyercatagory.CatagoryLawyer
+import com.example.lawadvat.ui.search.SearchActivity
 import com.example.lawadvat.ui.signup.Signup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -43,9 +44,12 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
-        val homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding.search.setOnClickListener {
+            val intent=Intent(requireContext(),SearchActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnSpecifiction.setOnClickListener{
             val intent=Intent(requireContext(),CatagoryLawyer::class.java)
             startActivity(intent)

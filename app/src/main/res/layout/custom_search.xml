@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:padding="02dp"
+        android:layout_margin="05dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#152267"
+        android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="05dp">
+
+    <ImageView
+        android:id="@+id/search_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="05dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/baseline_account_circle_24" />
+
+    <TextView
+        android:id="@+id/search_name"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Name"
+        android:textSize="12sp"
+        android:fontFamily="serif"
+        app:layout_constraintBottom_toBottomOf="@+id/search_profile"
+        app:layout_constraintStart_toEndOf="@+id/search_profile"
+        app:layout_constraintTop_toTopOf="@+id/search_profile" />
+
+    <TextView
+        android:id="@+id/search_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="location"
+        android:textSize="12sp"
+        android:fontFamily="serif"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/search_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_name" />
+
+    <TextView
+        android:id="@+id/search_catagory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="marquee"
+        android:fontFamily="serif"
+        android:maxLines="1"
+        android:text="catagory"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/search_name"
+        app:layout_constraintTop_toBottomOf="@+id/search_city"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>
