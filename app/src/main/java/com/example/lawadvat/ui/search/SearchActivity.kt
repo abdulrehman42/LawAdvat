@@ -28,7 +28,6 @@ class SearchActivity : AppCompatActivity() {
                 performSearch(query)
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 // Perform the search as the user types (optional)
                 performSearch(newText)
