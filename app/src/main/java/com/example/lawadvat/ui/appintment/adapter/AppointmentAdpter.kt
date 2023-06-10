@@ -2,6 +2,7 @@ package com.example.lawadvat.ui.appintment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -17,7 +18,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lawadvat.R
+import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.appintment.appointment.Appoint
+import com.example.lawadvat.ui.review.ReviewActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -69,7 +72,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
     @SuppressLint("SetTextI18n", "ResourceAsColor", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val l = list[position]
-        if (l?.name_lawyer!!.equals(user)) {
+        if (l?.name_lawyer!! == user) {
             if (l.check.equals("accept")) {
                 holder.client_card.isVisible = false
                 holder.linear_client.isVisible = false
@@ -132,6 +135,12 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 holder.btnpending.setBackgroundColor(R.color.red)
                 if (context != null) {
                     Glide.with(context).load(l.lawyer_img).into(holder.image2)
+                }
+                holder.accept_btn.isEnabled=true
+                holder.accept_btn.setOnClickListener {
+                    val intent=Intent(context,ReviewActivity::class.java)
+                    intent.putExtra(Variablecontain.name,l.name_lawyer)
+                    intent.putExtra(Variablecontain.img,l.lawyer_img)
                 }
             } else if (l.check.equals("reject")) {
                 holder.card_lawyer.isVisible = false

@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#152267"
+        android:background="#009688"
         android:orientation="vertical">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -57,19 +57,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/search_name" />
 
-    <TextView
-        android:id="@+id/search_catagory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ellipsize="marquee"
-        android:fontFamily="serif"
-        android:maxLines="1"
-        android:text="catagory"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/search_name"
-        app:layout_constraintTop_toBottomOf="@+id/search_city"/>
+        <TextView
+            android:id="@+id/search_catagory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="marquee"
+            android:fontFamily="serif"
+            android:maxLines="1"
+            android:text="catagory"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/search_name"
+            app:layout_constraintTop_toBottomOf="@+id/search_city" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
