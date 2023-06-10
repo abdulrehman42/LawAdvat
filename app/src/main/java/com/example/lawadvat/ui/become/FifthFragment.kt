@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import com.example.lawadvat.R
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.example.lawadvat.databinding.FragmentFifthBinding
 
 class FifthFragment : Fragment() {
    lateinit var binding:FragmentFifthBinding
+    val items = arrayOf("Murder", "Assault", "Theft", "Robbery", "Offenses","Fraud","Cybercrime","Kidnapping","Personal Injury","Property Disputes","Contract Disputes","Family Law","Divorce","Child Custody","Child Suppor","Adoption","Domestic Violence","Immigration Appeals","Regulatory Compliance","Tax Appeals","Government Agency Disputes","Civil Rights Violations","Freedom of Speech","Employment Law","Pollution","Climate Change","Environmental Cleanup")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -18,6 +20,15 @@ class FifthFragment : Fragment() {
         binding= FragmentFifthBinding.inflate(layoutInflater)
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key1")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
+        binding.itemFirst.setAdapter(adapter)
+        binding.itemSecond.setAdapter(adapter)
+        binding.itemThird.setAdapter(adapter)
+        binding.itemForth.setAdapter(adapter)
+        binding.itemFirst.threshold=1
+        binding.itemSecond.threshold=1
+        binding.itemThird.threshold=1
+        binding.itemForth.threshold=1
         binding.backBtn.setOnClickListener {
             if (array!=null) {
                 move_back(array)
@@ -91,9 +102,7 @@ class FifthFragment : Fragment() {
             ?.commit()
     }
     fun alternative(array:java.util.ArrayList<String>) {
-        /*val items = listOf("Murder", "Assault", "Theft", "Robbery", "Offenses","Fraud","Cybercrime","Kidnapping","Personal Injury","Property Disputes","Contract Disputes","Family Law","Divorce","Child Custody","Child Suppor","Adoption","Domestic Violence","Immigration Appeals","Regulatory Compliance","Tax Appeals","Government Agency Disputes","Civil Rights Violations","Freedom of Speech","Employment Law","Pollution","Climate Change","Environmental Cleanup")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
-        binding.itemFirst.setadpter(adapter)*/
+
         val n = binding.itemFirst.text.toString()
         val e = binding.itemSecond.text.toString()
         val num = binding.itemThird.text.toString()

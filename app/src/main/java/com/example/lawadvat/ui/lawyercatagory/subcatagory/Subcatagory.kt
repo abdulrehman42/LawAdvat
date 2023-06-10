@@ -21,6 +21,8 @@ class Subcatagory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivitySubcatagoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val data=intent.getStringExtra(Variablecontain.data)
+        supportActionBar?.title=data.toString()
         in_it()
     }
 

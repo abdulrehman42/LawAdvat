@@ -39,15 +39,21 @@
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
                 tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/item_first"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highly Specialize in Practical Area"/>
+               <!-- <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Highly Specialize in Practical Area"
                     android:clickable="false"
-                    android:inputType="text"
-                    tools:ignore="HardcodedText" />
+                    android:autoText="true"
+                    android:inputType="textEnableTextConversionSuggestions"
+                    tools:ignore="HardcodedText" />-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -59,13 +65,18 @@
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
                 tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/item_second"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highly Specialize in Practical Area"/>
+                <!--<com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Specializes in practical area"
-                    android:inputType="text" />
+                    android:inputType="text" />-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -78,13 +89,18 @@
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
                 tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/item_third"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highly Specialize in Practical Area"/>
+               <!-- <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_third"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Specialize in practical area"
-                    android:inputType="text" />
+                    android:inputType="text" />-->
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_forth"
@@ -96,13 +112,18 @@
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
                 tools:ignore="UnusedAttribute">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/item_forth"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highly Specialize in Practical Area"/>
+              <!--  <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_forth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Specialize in practical area"
-                    android:inputType="text" />
+                    android:inputType="text" />-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout

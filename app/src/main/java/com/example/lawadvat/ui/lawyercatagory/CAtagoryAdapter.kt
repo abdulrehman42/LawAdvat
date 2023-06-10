@@ -123,27 +123,26 @@ class CAtagoryAdapter(val context: Context,val list:ArrayList<Services>):Recycle
         }20->{
             intent.putExtra(Variablecontain.data,"Government Agency Disputes")
             context.startActivity(intent)
+        }21->{
+            intent.putExtra(Variablecontain.data,"Civil Rights Violations")
+            context.startActivity(intent)
         }
             22->{
-                intent.putExtra(Variablecontain.data,"Civil Rights Violations")
+                intent.putExtra(Variablecontain.data,"Freedom of Speech")
                 context.startActivity(intent)
             }23->
         {
-            intent.putExtra(Variablecontain.data,"Freedom of Speech")
+            intent.putExtra(Variablecontain.data,"Employment Law")
             context.startActivity(intent)
         }24->
         {
-            intent.putExtra(Variablecontain.data,"Employment Law")
+            intent.putExtra(Variablecontain.data,"Pollution")
             context.startActivity(intent)
         }
             25->{
-                intent.putExtra(Variablecontain.data,"Pollution")
+                intent.putExtra(Variablecontain.data,"Climate Change")
                 context.startActivity(intent)
             }26->
-        {
-            intent.putExtra(Variablecontain.data,"Climate Change")
-            context.startActivity(intent)
-        }27->
         {
             intent.putExtra(Variablecontain.data,"Environmental Cleanup")
             context.startActivity(intent)

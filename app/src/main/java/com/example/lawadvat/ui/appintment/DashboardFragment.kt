@@ -83,7 +83,7 @@ class DashboardFragment : Fragment() {
         binding.recyclerviewAppointment.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
-            true
+            false
         )
         binding.recyclerviewAppointment.adapter = adapter
         adapter.notifyDataSetChanged()
