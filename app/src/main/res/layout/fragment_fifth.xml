@@ -70,7 +70,7 @@
                     style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Highly Specialize in Practical Area"/>
+                    android:hint="Specializes in practical area"/>
                 <!--<com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_second"
                     android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Highly Specialize in Practical Area"/>
+                    android:hint="Specializes in practical area"/>
                <!-- <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_third"
                     android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                     style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Highly Specialize in Practical Area"/>
+                    android:hint="Specializes in practical area"/>
               <!--  <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_forth"
                     android:layout_width="match_parent"

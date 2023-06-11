@@ -1,5 +1,7 @@
 package com.example.lawadvat.ui.become.entity
 
+import com.example.lawadvat.ui.review.Review_entity
+
 data class Requirement(
     val img: String? = null,
     val name: String? = null,
@@ -27,6 +29,7 @@ data class Requirement(
     val phd: String? = null,
     val id:String?=null,
     val satisfy:String?=null,
-    val review:String?=null,
-    var layer: Boolean? = false
-)
+    var layer: Boolean? = false,
+    /*var review: ArrayList<Review_entity?>? =null*/
+
+    )

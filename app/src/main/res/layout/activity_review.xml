@@ -27,29 +27,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_account_circle_24" />
-    <TextView
-        android:id="@+id/name"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Name"
-        android:fontFamily="serif"
-        app:layout_constraintBottom_toBottomOf="@+id/profile"
-        app:layout_constraintStart_toEndOf="@+id/profile"
-        app:layout_constraintTop_toTopOf="@+id/profile" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/review_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="How was your experience with ? "
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Name"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/profile"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintBottom_toBottomOf="@+id/review_profile"
+            app:layout_constraintStart_toEndOf="@+id/review_profile"
+            app:layout_constraintTop_toTopOf="@+id/review_profile" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="How was your experience with them? "
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/review_profile"
+            app:layout_constraintTop_toBottomOf="@+id/review_name" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -60,14 +65,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/like"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 app:srcCompat="@drawable/baseline_thumb_up_alt_24" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/unlike"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

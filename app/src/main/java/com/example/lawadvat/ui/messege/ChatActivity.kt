@@ -137,7 +137,6 @@ class ChatActivity : AppCompatActivity() {
         database.child(name.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list = ArrayList<Messege?>()
-
                 if (snapshot.exists()) {
                     num = snapshot.childrenCount.toInt()
                     for (postSnapshot in snapshot.children) {

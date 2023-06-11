@@ -3,6 +3,7 @@ package com.example.lawadvat.ui.appintment.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
         val date1 = view.findViewById<TextView>(R.id.date1)
         val image1 = view.findViewById<ImageView>(R.id.client_lawyer_image1)
         val btnpending = view.findViewById<Button>(R.id.pending)
+        val reviewbtn=view.findViewById<TextView>(R.id.review_btn)
 
         val client_card = view.findViewById<CardView>(R.id.client_appointmen_cardview)
         val linear_client = view.findViewById<LinearLayout>(R.id.client_appointmen_linear)
@@ -71,7 +74,10 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
 
     @SuppressLint("SetTextI18n", "ResourceAsColor", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val prefs = context?.getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE)
+        val check = prefs?.getBoolean("review",false)
         val l = list[position]
+        holder.reviewbtn.paintFlags = holder.reviewbtn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         if (l?.name_lawyer!! == user) {
             if (l.check.equals("accept")) {
                 holder.client_card.isVisible = false
@@ -131,17 +137,15 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 holder.fee.text = "fee:" + l.fee.toString() + "PKR"
                 holder.time.text = l.time.toString()
                 holder.date.text = l.date.toString()
+                if (check==false){
+                    holder.reviewbtn.isVisible=true
+                }
                 holder.btnpending.text = "Accepted"
                 holder.btnpending.setBackgroundColor(R.color.red)
                 if (context != null) {
                     Glide.with(context).load(l.lawyer_img).into(holder.image2)
                 }
-                holder.accept_btn.isEnabled=true
-                holder.accept_btn.setOnClickListener {
-                    val intent=Intent(context,ReviewActivity::class.java)
-                    intent.putExtra(Variablecontain.name,l.name_lawyer)
-                    intent.putExtra(Variablecontain.img,l.lawyer_img)
-                }
+
             } else if (l.check.equals("reject")) {
                 holder.card_lawyer.isVisible = false
                 holder.linear_lawyer.isVisible = false
@@ -170,6 +174,9 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                     Glide.with(context).load(l?.lawyer_img).into(holder.image2)
                 }
             }
+        }
+        holder.reviewbtn.setOnClickListener {
+            move_on(l)
         }
         holder.accept_btn.setOnClickListener {
             if (l?.name_lawyer!!.equals(user)) {
@@ -209,6 +216,14 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 Toast.makeText(context," please the page Refresh",Toast.LENGTH_SHORT).show()
             }, 100)
         }
+
+    }
+
+    private fun move_on(l: Appoint) {
+        val intent=Intent(context,ReviewActivity::class.java)
+        intent.putExtra(Variablecontain.name,l?.name_lawyer)
+        intent.putExtra(Variablecontain.img,l?.lawyer_img)
+        context?.startActivity(intent)
     }
 
     private fun update_database(
