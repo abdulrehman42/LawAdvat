@@ -53,6 +53,7 @@ class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):Recy
            val intent= Intent(context,HireProfile::class.java)
             intent.putExtra(Variablecontain.name,l?.name)
             intent.putExtra(Variablecontain.img,l?.img)
+            intent.putExtra(Variablecontain.email,l?.email)
             intent.putExtra(Variablecontain.location,l?.office_location)
             intent.putExtra(Variablecontain.exp,l?.experince)
             intent.putExtra(Variablecontain.fee,l?.fee)

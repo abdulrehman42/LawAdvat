@@ -18,5 +18,6 @@ class Variablecontain {
         val reciver_img="img"
         val img2="img2"
         val data="object"
+        val email="email"
     }
 }

@@ -31,10 +31,12 @@ class HireProfile : AppCompatActivity() {
             val img=intent.getStringExtra(Variablecontain.img)
             val location=intent.getStringExtra(Variablecontain.location)
             val fee=intent.getStringExtra(Variablecontain.fee)
+            val email=intent.getStringExtra(Variablecontain.email)
             val intent=Intent(this, Appointment::class.java)
             intent.putExtra(Variablecontain.name,name)
             intent.putExtra(Variablecontain.img,img)
             intent.putExtra(Variablecontain.location,location)
+            intent.putExtra(Variablecontain.email,email)
             intent.putExtra(Variablecontain.fee,fee)
             startActivity(intent)
         }

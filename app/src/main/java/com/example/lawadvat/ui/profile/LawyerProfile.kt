@@ -69,7 +69,7 @@ class LawyerProfile : Fragment() {
                 /*else{
                     binding.noReview.isVisible=true
                 }*/
-                lets_start(requireContext())
+                lets_start(context)
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -100,10 +100,10 @@ class LawyerProfile : Fragment() {
     }
     @SuppressLint("NotifyDataSetChanged")
     private fun recyclerview_review(list: ArrayList<Review_entity?>) {
-        val adapter= Review_Adapter(requireContext(),list)
+        val adapter= Review_Adapter(context,list)
         binding.recyclerReview.setHasFixedSize(true)
         binding.recyclerReview.layoutManager = LinearLayoutManager(
-            requireContext(),
+            context,
             LinearLayoutManager.VERTICAL,
             false
         )
@@ -112,7 +112,7 @@ class LawyerProfile : Fragment() {
     }
 
 
-    private fun lets_start(context: Context) {
+    private fun lets_start(context: Context?) {
         val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
         database = Firebase.database.reference
         database.child("Lawyer").child(user).addValueEventListener(object : ValueEventListener {
@@ -140,11 +140,13 @@ class LawyerProfile : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun in_it(array: Requirement?, view: Context) {
+    fun in_it(array: Requirement?, view: Context?) {
         if (array != null) {
-            Glide.with(view)
-                .load(array.img)
-                .into(binding.profileLawyerImage)
+            if (view != null) {
+                Glide.with(view)
+                    .load(array.img)
+                    .into(binding.profileLawyerImage)
+            }
             binding.profileLawyerName.text = array.name.toString()
             binding.review.text="($review)"
             binding.appoint.text="($appoint)"

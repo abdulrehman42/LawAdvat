@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lawadvat.R
 import com.example.lawadvat.ui.review.Review_entity
-class Review_Adapter(val context: Context, var list: ArrayList<Review_entity?>):
+class Review_Adapter(val context: Context?, var list: ArrayList<Review_entity?>):
     RecyclerView.Adapter<Review_Adapter.Holder>() {
     class Holder(v: View): RecyclerView.ViewHolder(v)
     {

@@ -1,11 +1,14 @@
 package com.example.lawadvat.ui.signup
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.lawadvat.MainActivity
 import com.example.lawadvat.databinding.ActivitySignupBinding
+import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.become.entity.Requirement
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -26,8 +29,6 @@ class Signup : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var googleoption:GoogleSignInOptions
     lateinit var googleclient: GoogleSignInClient
-    val firebaseAuth1:FirebaseAuth=FirebaseAuth.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySignupBinding.inflate(layoutInflater)
@@ -85,6 +86,7 @@ class Signup : AppCompatActivity() {
             }
         }
     }
+
     fun get_profile(user: String)
     {
         val databaseRef = FirebaseDatabase.getInstance().reference

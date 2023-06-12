@@ -1,9 +1,12 @@
 package com.example.lawadvat.ui.setting
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -29,7 +32,7 @@ class Setting : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.teal_700);
         binding= FragmentSettingBinding.inflate(inflater)
-        requireActivity()?.actionBar?.title = "Profile"
+        requireActivity().actionBar?.title = "Profile"
         val prefs = requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE)
         val check = prefs.getBoolean("lawyer",false)
         binding.become.isVisible = !check
@@ -48,6 +51,9 @@ class Setting : Fragment() {
             editor.apply()
             val intent=Intent(requireActivity(),MainActivity::class.java)
             startActivity(intent)
+        }
+        binding.feedback.setOnClickListener{
+            sendEmail()
         }
         binding.join.setOnClickListener{
             if (auth.currentUser!=null)
@@ -88,7 +94,24 @@ class Setting : Fragment() {
         return binding.root
     }
 
+    private fun sendEmail() {
 
+        val selectorIntent = Intent(Intent.ACTION_SENDTO)
+        val urlString = "mailto:" + Uri.encode("abdulrehman4241566@gmail.com") + "?subject=" + Uri.encode("Your valueable feedback") + "&body=" + Uri.encode("")
+        selectorIntent.data = Uri.parse(urlString)
+
+        /* val emailIntent = Intent(Intent.ACTION_SEND)
+         emailIntent.putExtra(Intent.EXTRA_EMAIL, "hammadrfq3@gmail.com")
+         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your valuable feedback")
+         emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+         emailIntent.selector = selectorIntent*/
+
+        try {
+            startActivity(Intent.createChooser(selectorIntent, "Send email..."))
+        } catch (ex: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "There is no email client installed.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
 
