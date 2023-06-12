@@ -28,8 +28,7 @@ data class Requirement(
     val bar_of_law: String? = null,
     val phd: String? = null,
     val id:String?=null,
-    val satisfy:String?=null,
     var layer: Boolean? = false,
-    /*var review: ArrayList<Review_entity?>? =null*/
+    var satisfy:Int? =null
 
     )

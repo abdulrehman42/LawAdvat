@@ -2,11 +2,12 @@ package com.example.lawadvat.ui.review
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.lawadvat.databinding.ActivityReviewBinding
 import com.example.lawadvat.ui.Variablecontain
-import com.example.lawadvat.ui.become.entity.Requirement
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,14 +18,31 @@ class ReviewActivity : AppCompatActivity() {
     lateinit var binding: ActivityReviewBinding
     val user=FirebaseAuth.getInstance().currentUser?.displayName.toString()
     var num=0
+   // var satisfy=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        in_it()
+        binding.like.isEnabled=true
+        binding.like.setOnClickListener{
+            if (binding.like.isChecked){
+                val satisfy=1
+                in_it(1)
+              //  Toast.makeText(this,"like",Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                in_it(0)
+            }
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            in_it(0)
+        }, 100)
+
     }
 
-    private fun in_it() {
+    private fun in_it(i: Int) {
         val name=intent.getStringExtra(Variablecontain.name)
         val img=intent.getStringExtra(Variablecontain.img)
         binding.reviewName.text=name.toString()
@@ -32,41 +50,39 @@ class ReviewActivity : AppCompatActivity() {
         binding.submitBtn.setOnClickListener {
             val getreview=binding.review.text.toString()
 
-            /* if (!binding.like.isClickable)
-             {
-                 Toast.makeText(this,"check the reaction button ",Toast.LENGTH_SHORT).show()
-
-             }
-             else*/ if (getreview.isEmpty())
+            if (getreview.isEmpty())
             {
                 Toast.makeText(this,"Please review",Toast.LENGTH_SHORT).show()
-            }/*else if (getreview.length < 5){
-                Toast.makeText(this," please write review more than 10 words",Toast.LENGTH_SHORT).show()
-            }*/
+            }
             else{
-                get_list(name ,getreview)
-               // forward_review(result, getreview, name)
+                /*Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        get_rating(name)
+                    }
+                ,1000)*/
+                forward_review(getreview,name,i)
             }
         }
 
     }
 
-    private fun get_list(name: String?, getreview: String) {
-        val database=FirebaseDatabase.getInstance().getReference("Lawyer")
-        database.child(name.toString()).addValueEventListener(object : ValueEventListener {
+    override fun onStart() {
+        super.onStart()
+        val name=intent.getStringExtra(Variablecontain.name)
+        get_rating(name)
+    }
+
+    private fun get_rating(name: String?) {
+        val database=FirebaseDatabase.getInstance().reference
+        database.child("review").child(name.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-  //              val list = ArrayList<Requirement?>()
                 if (snapshot.exists()) {
-                   // num = snapshot.childrenCount.toInt()
-                   /* for (postSnapshot in snapshot.children) {*/
-                        val result: Requirement? = snapshot.getValue(Requirement::class.java)
-                        //list.add(result)
-                        forward_review(result,getreview,name)
-                    //}
+                     num = snapshot.childrenCount.toInt()
 
                 } else {
                     Toast.makeText(this@ReviewActivity, "data not found", Toast.LENGTH_SHORT).show()
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -76,36 +92,23 @@ class ReviewActivity : AppCompatActivity() {
         })
     }
 
-    private fun forward_review(result: Requirement?, value: String, name: String?) {
-        val database=FirebaseDatabase.getInstance().getReference("Lawyer")
-        val review1=Review_entity(user,value)
-        val list = ArrayList<Review_entity?>()
-       /* var n=num+1
-        for (i in 0..n){
-            list.add(review1)
-        }*/
-        val re=Review_entity(user,value)
-        val review=Requirement(
-            img = result?.img,
-            name = result?.name, email = result?.email, phone = result?.phone,
-            cnic =result?.cnic, gender = result?.gender,
-            country = result?.country, province = result?.province, city = result?.city, office_location = result?.office_location, general__id = result?.general__id, high_court_id = result?.high_court_id, supreme_court_id =result?.supreme_court_id, description =result?.description, experince = result?.experince,
-            fee = result?.fee, first_specilize = result?.first_specilize, second_specilize = result?.second_specilize, third_specilize = result?.third_specilize, fourth_specilize = result?.fourth_specilize, llb = result?.llb, llm = result?.llm, bar_of_law = result?.bar_of_law, phd = result?.phd, id = result?.id,
-            layer = true)
-        val editor =
-            getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
-
-        database.child(name.toString()).child("review").child(user).setValue(re)
+    private fun forward_review(value: String, name: String?, i: Int) {
+        val database=FirebaseDatabase.getInstance().reference
+        val database1=FirebaseDatabase.getInstance().getReference("Lawyer")
+        val re=Review_entity(user,value,i)
+       /* val editor =
+            getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()*/
+        //database1.child(name.toString()).setValue(review)
+        database.child("review").child(name.toString()).child((num + 1).toString()).setValue(re)
             .addOnSuccessListener {
-                editor.putBoolean("review", true)
-                editor.apply()
+                /*editor.putBoolean("review", true)
+                editor.apply()*/
                 Toast.makeText(this,"Review successfully submit",Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
-                editor.putBoolean("review", false)
-                editor.apply()
+                /*editor.putBoolean("review", false)
+                editor.apply()*/
                 Toast.makeText(this,"Review failed to submit",Toast.LENGTH_SHORT).show()
             }
-
         finish()
 
 

@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -22,13 +21,19 @@ import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.appintment.appointment.Appoint
+import com.example.lawadvat.ui.messege.Messege
 import com.example.lawadvat.ui.review.ReviewActivity
+import com.example.lawadvat.ui.review.Review_entity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
     RecyclerView.Adapter<AppointmentAdpter.ViewHolder>() {
+    var checkit:Boolean=false
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val user = firebaseAuth.currentUser?.displayName.toString()
 
@@ -45,7 +50,6 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
         val image1 = view.findViewById<ImageView>(R.id.client_lawyer_image1)
         val btnpending = view.findViewById<Button>(R.id.pending)
         val reviewbtn=view.findViewById<TextView>(R.id.review_btn)
-
         val client_card = view.findViewById<CardView>(R.id.client_appointmen_cardview)
         val linear_client = view.findViewById<LinearLayout>(R.id.client_appointmen_linear)
         val lawyer_text_linear = view.findViewById<LinearLayout>(R.id.lawyer_text_linear)
@@ -74,9 +78,13 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
 
     @SuppressLint("SetTextI18n", "ResourceAsColor", "NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val prefs = context?.getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE)
-        val check = prefs?.getBoolean("review",false)
+        /*val prefs = context?.getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE)
+        val check = prefs?.getBoolean("review",false)*/
         val l = list[position]
+      /*  Handler(Looper.getMainLooper()).postDelayed({
+            check_condition(l?.name_lawyer.toString())
+        },5000)*/
+
         holder.reviewbtn.paintFlags = holder.reviewbtn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         if (l?.name_lawyer!! == user) {
             if (l.check.equals("accept")) {
@@ -137,7 +145,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 holder.fee.text = "fee:" + l.fee.toString() + "PKR"
                 holder.time.text = l.time.toString()
                 holder.date.text = l.date.toString()
-                if (check==false){
+                if (!checkit){
                     holder.reviewbtn.isVisible=true
                 }
                 holder.btnpending.text = "Accepted"
@@ -219,6 +227,30 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
 
     }
 
+    private fun check_condition(name: String) {
+        val database=FirebaseDatabase.getInstance().reference
+        database.child("review").child(name).addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    //num = snapshot.childrenCount.toInt()
+                    for (postSnapshot in snapshot.children) {
+                        val result: Review_entity? = postSnapshot.getValue(Review_entity::class.java)
+                        checkit = result?.send_review_name==user
+                    }
+                } else {
+                    checkit=false
+                    Toast.makeText(context, "data not found 2", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, "What's wrong with you", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+    }
+
     private fun move_on(l: Appoint) {
         val intent=Intent(context,ReviewActivity::class.java)
         intent.putExtra(Variablecontain.name,l?.name_lawyer)
@@ -264,7 +296,6 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 date = date
             )
         )
-
-
     }
+
 }

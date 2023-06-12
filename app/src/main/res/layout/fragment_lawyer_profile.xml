@@ -331,6 +331,23 @@
             android:layout_height="wrap_content"
             android:padding="05dp"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+
+                android:textColor="@color/black"
+                android:fontFamily="serif"
+                android:text="Reviews"/>
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/no_review"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                android:fontFamily="serif"
+                android:text="No Review"/>-->
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

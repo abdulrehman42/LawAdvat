@@ -65,19 +65,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView">
 
-            <ImageButton
+            <ToggleButton
                 android:id="@+id/like"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/baseline_thumb_up_alt_24" />
+                android:checked="false"
+                android:textOn=""
+                android:textOff=""
+                android:text=""
+                android:background="@drawable/custom_check" />
 
-            <ImageButton
+            <!--<ToggleButton
                 android:id="@+id/unlike"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/baseline_thumb_down_alt_24" />
+                android:textOn=""
+                android:textOff=""
+                android:text=""
+                android:background="@drawable/custom_check2" />-->
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
