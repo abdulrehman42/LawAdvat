@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:backgroundTint="#939292"
+    android:layout_margin="05dp"
+    android:backgroundTint="#F2F2F2"
     android:background="@drawable/msg_round"
     android:orientation="vertical"
     >

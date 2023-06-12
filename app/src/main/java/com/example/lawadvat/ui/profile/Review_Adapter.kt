@@ -11,7 +11,7 @@ import com.example.lawadvat.R
 import com.example.lawadvat.ui.review.Review_entity
 class Review_Adapter(val context: Context, var list: ArrayList<Review_entity?>):
     RecyclerView.Adapter<Review_Adapter.Holder>() {
-    class Holder(val v: View): RecyclerView.ViewHolder(v)
+    class Holder(v: View): RecyclerView.ViewHolder(v)
     {
         val name=v.findViewById<TextView>(R.id.review_writer)
         val review=v.findViewById<TextView>(R.id.review_show)

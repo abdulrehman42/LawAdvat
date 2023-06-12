@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentLawyerProfileBinding
+import com.example.lawadvat.ui.become.SeventhFragmen
 import com.example.lawadvat.ui.become.entity.Requirement
 import com.example.lawadvat.ui.home.adapter.ListItem
 import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
@@ -32,6 +33,7 @@ class LawyerProfile : Fragment() {
     lateinit var binding: FragmentLawyerProfileBinding
     private lateinit var database: DatabaseReference
     var review=0
+    var appoint=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +46,7 @@ class LawyerProfile : Fragment() {
        /* Handler(Looper.getMainLooper()).postDelayed({
             lets_start(requireContext())
         }, 100)*/
-get_review()
+    get_appointment()
 
         return binding.root
     }
@@ -75,14 +77,34 @@ get_review()
 
         })
     }
+    private fun get_appointment() {
+        val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        val database=FirebaseDatabase.getInstance().reference
+        database.child(user).addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    appoint=snapshot.childrenCount.toInt()
 
+                }
+                /*else{
+                    binding.noReview.isVisible=true
+                }*/
+                get_review()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
     @SuppressLint("NotifyDataSetChanged")
     private fun recyclerview_review(list: ArrayList<Review_entity?>) {
         val adapter= Review_Adapter(requireContext(),list)
         binding.recyclerReview.setHasFixedSize(true)
         binding.recyclerReview.layoutManager = LinearLayoutManager(
             requireContext(),
-            LinearLayoutManager.HORIZONTAL,
+            LinearLayoutManager.VERTICAL,
             false
         )
         binding.recyclerReview.adapter = adapter
@@ -125,6 +147,7 @@ get_review()
                 .into(binding.profileLawyerImage)
             binding.profileLawyerName.text = array.name.toString()
             binding.review.text="($review)"
+            binding.appoint.text="($appoint)"
             binding.location.text = array.office_location.toString()
             binding.experience.text = "Experience:"+array.experince.toString()
             binding.first.text = "\u25BA"+array.first_specilize.toString()
@@ -135,7 +158,24 @@ get_review()
             binding.high.text=array.first_specilize.toString()
             binding.fee.text=array.fee.toString()+"PKR"
             binding.overview.text=array.description.toString()
-
+            binding.editProfile.setOnClickListener{
+               /* val update=ArrayList<Requirement?>()
+                update.add(Requirement(
+                        img = array?.img,
+                name = array?.name, email = array?.email, phone = array?.phone,
+                cnic =array?.cnic, gender = array?.gender,
+                country = array?.country, province = array?.province, city = array?.city, office_location = array?.office_location, general__id = array?.general__id, high_court_id = array?.high_court_id, supreme_court_id =array?.supreme_court_id, description =array?.description, experince = array?.experince,
+                fee = array?.fee, first_specilize = array?.first_specilize, second_specilize = array?.second_specilize, third_specilize = array?.third_specilize, fourth_specilize = array?.fourth_specilize, llb = array?.llb, llm = array?.llm, bar_of_law = array?.bar_of_law, phd = array?.phd, id = array?.id,
+                layer = true))*/
+                val bundle = Bundle()
+                bundle.putParcelable("update", array)
+                val seventhFragment = SeventhFragmen()
+                seventhFragment.arguments = bundle
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.nav_host_fragment_activity_main, seventhFragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+            }
             if (array.llm.equals("null")) {
                 binding.secondEd.isVisible = false
             } else if (array.bar_of_law.equals("null")) {

@@ -26,6 +26,7 @@
                 android:layout_marginBottom="10dp"
                 android:textColor="#009688"
                 android:textSize="20sp"
+                android:id="@+id/top_heading"
                 android:textStyle="bold" />
 
             <ImageView

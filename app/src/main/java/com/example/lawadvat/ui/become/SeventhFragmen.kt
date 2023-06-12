@@ -1,5 +1,6 @@
 package com.example.lawadvat.ui.become
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.lawadvat.R
@@ -28,6 +30,7 @@ class SeventhFragmen : Fragment() {
         binding= FragmentSeventhBinding.inflate(layoutInflater)
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white)
         val array: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
+        val update_profile=arguments?.getParcelable<Requirement>("update")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
         binding.itemFirst.setAdapter(adapter)
         binding.itemSecond.setAdapter(adapter)
@@ -41,11 +44,82 @@ class SeventhFragmen : Fragment() {
             back_data()
         }
         binding.saveBtn.setOnClickListener {
-            if (array != null) {
+           if (update_profile!=null)
+           {
+               alternative_update(update_profile)
+           }
+           else if (array != null) {
                 alternative(array)
             }
         }
         return binding.root
+    }
+
+    private fun alternative_update(update: Requirement) {
+        val n = binding.itemName.text.toString()
+        val e = binding.itemEmail.text.toString()
+        val num = binding.itemNumber.text.toString()
+        val c = binding.itemCnic.text.toString()
+        val country = binding.itemCountry.text.toString()
+        val province = binding.itemProvince.text.toString()
+        val city = binding.itemCity.text.toString()
+        val location = binding.itemLocation.text.toString()
+        val genderbtn: RadioGroup = binding.radioGroup
+        val general = binding.itemGeneral.text.toString()
+        val high_cout = binding.itemHigh.text.toString()
+        val supreme = binding.itemSupreme.text.toString()
+        val des = binding.itemDesc.text.toString()
+        val experience = binding.itemExperience.text.toString()
+        val fee = binding.itemFee.text.toString()
+        val first = binding.itemFirst.text.toString()
+        val second = binding.itemSecond.text.toString()
+        val third = binding.itemThird.text.toString()
+        val fourth=binding.itemForth.text.toString()
+        val study1 = binding.itemFirststudy.text.toString()
+        val study2 = binding.itemSecondstudy.text.toString()
+        val study3 = binding.itemThirdstudy.text.toString()
+        val study4=binding.itemForthstudy.text.toString()
+        genderbtn.setOnCheckedChangeListener { radioGroup, i ->
+            when (i) {
+                R.id.male -> {
+                    binding.male.isChecked = true
+                }
+
+                R.id.female -> {
+                    binding.female.isChecked = true
+                }
+            }
+        }
+
+        val radio: RadioButton = binding.root.findViewById(genderbtn.checkedRadioButtonId)
+        update.name = n
+        update.email = e
+        update.phone = num
+        update.cnic = c
+        update.gender=radio.text.toString()
+        update.country = country
+        update.province = province
+        update.city = city
+        update.office_location = location
+        update.general__id = general
+        update.high_court_id = high_cout
+        update.supreme_court_id = supreme
+        update.description = des
+        update.experince = experience
+        update.fee = fee
+        update.first_specilize = first
+        update.second_specilize = second
+        update.third_specilize = third
+        update.fourth_specilize=fourth
+        update.llb = study1
+        update.llm = study2
+        update.bar_of_law = study3
+        update.phd=study4
+        val database = FirebaseDatabase.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        val user_img=FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
+        val myRef = database.getReference("Lawyer").child(user)
+        myRef.setValue(update)
     }
 
     private fun back_data() {
@@ -170,12 +244,52 @@ class SeventhFragmen : Fragment() {
         //Snackbar.make(requireView(), "Your data successfully saved", Snackbar.LENGTH_SHORT).show()
 
     }
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
         val user_img=FirebaseAuth.getInstance()
-
         val array1: java.util.ArrayList<String>? = arguments?.getStringArrayList("key")
-        if (array1!=null)
+        val update=arguments?.getParcelable<Requirement>("update")
+        if (update!=null)
+        {
+            requireActivity().actionBar?.title="Update Profile"
+            binding.topHeading.text = "Update your Information"
+            binding.backBtn.isVisible=false
+            Glide.with(this)
+                .load(user_img.currentUser?.photoUrl)
+                .into(binding.profile)
+            binding.itemName.setText(update.name)
+            binding.itemEmail.setText(update.email)
+            binding.itemNumber.setText(update.phone)
+            binding.itemCnic.setText(update.cnic)
+            if (update.gender?.equals("Male") == true)
+            {
+                binding.male.isChecked=true
+            }
+            else
+            {
+                binding.female.isChecked=true
+            }
+            binding.itemCountry.setText(update.country)
+            binding.itemProvince.setText(update.province)
+            binding.itemCity.setText(update.city)
+            binding.itemLocation.setText(update.office_location)
+            binding.itemGeneral.setText(update.general__id)
+            binding.itemHigh.setText(update.high_court_id)
+            binding.itemSupreme.setText(update.supreme_court_id)
+            binding.itemDesc.setText(update.description)
+            binding.itemExperience.setText(update.experince)
+            binding.itemFee.setText(update.fee)
+            binding.itemFirst.setText(update.first_specilize)
+            binding.itemSecond.setText(update.second_specilize)
+            binding.itemThird.setText(update.third_specilize)
+            binding.itemForth.setText(update.fourth_specilize)
+            binding.itemFirststudy.setText(update.llb)
+            binding.itemSecondstudy.setText(update.llm)
+            binding.itemThirdstudy.setText(update.bar_of_law)
+            binding.itemForthstudy.setText(update.phd)
+
+        }else if (array1!=null)
         {
             Glide.with(this)
                 .load(user_img.currentUser?.photoUrl)
