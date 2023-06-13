@@ -78,8 +78,8 @@ class HomeFragment : Fragment() {
                 for (postSnapshot in snapshot.children) {
                     val result: Requirement? =postSnapshot.getValue(Requirement::class.java)!!
                     list.add(result)
-                    recyclerview_hire(list)
                 }
+                recyclerview_hire(list)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -119,7 +119,7 @@ class HomeFragment : Fragment() {
         binding.lawyerRecyclerview.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
-            true
+            false
         )
         binding.lawyerRecyclerview.adapter = adapter
         adapter.notifyDataSetChanged()

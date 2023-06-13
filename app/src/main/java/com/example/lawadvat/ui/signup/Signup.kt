@@ -33,6 +33,7 @@ class Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title="Signup"
         binding.signinBtn.setOnClickListener{
             sign_process()
         }

@@ -112,6 +112,14 @@
                     android:fontFamily="serif"
                     android:textColor="@color/black"
                     android:id="@+id/fee1"/>
+                <ImageView
+                    android:layout_gravity="end"
+                    android:id="@+id/report"
+                    android:layout_width="30dp"
+                    android:layout_marginTop="02dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/complan"
+                    app:tint="#FF1100" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
