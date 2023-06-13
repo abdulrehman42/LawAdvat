@@ -26,9 +26,9 @@ data class Requirement(
     var third_specilize: String? = null,
     var fourth_specilize: String? = null,
     var llb: String? = null,
-    var llm: String? = null,
-    var bar_of_law: String? = null,
-    var phd: String? = null,
+    var llm: String? = "--",
+    var bar_of_law: String? = "--",
+    var phd: String? = "--",
     val id:String?=null,
     var layer: Boolean? = false,
     var satisfy:Int? =null

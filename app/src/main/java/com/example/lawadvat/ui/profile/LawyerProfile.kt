@@ -178,11 +178,11 @@ class LawyerProfile : Fragment() {
                     ?.addToBackStack(null)
                     ?.commit()
             }
-            if (array.llm.equals("null")) {
+            if (array.llm.equals("--")) {
                 binding.secondEd.isVisible = false
-            } else if (array.bar_of_law.equals("null")) {
+            } else if (array.bar_of_law.equals("--")) {
                 binding.thirdEd.isVisible = false
-            } else if (array.phd.equals("null")) {
+            } else if (array.phd.equals("--")) {
                 binding.fourthEd.isVisible = false
             } else {
                 binding.thirdEd.isInvisible = false
