@@ -72,11 +72,26 @@ class ThirdFragment : Fragment() {
         val supreme = binding.itemSupreme.text.toString().trim()
         if (general.isEmpty()) {
             binding.layoutGeneral.error = "Please fill this field"
-        } else if (high.isEmpty()) {
+        }else if (general.length > 6){
+            binding.layoutGeneral.error = "Invalid general license"
+        }else if (general.length < 6) {
+            binding.layoutGeneral.error = "Invalid general license"
+        }
+        else if (high.isEmpty()) {
             binding.layoutHigh.error = "Please fill this field"
-        } else if (supreme.isEmpty()) {
+        }else if (high.length > 6){
+            binding.layoutHigh.error = "Invalid Highcourt license"
+        }else if (high.length < 6) {
+            binding.layoutHigh.error = "Invalid Highcourt license"
+        }
+        else if (supreme.isEmpty()) {
             binding.layoutSupreme.error = "Please fill this field"
-        } else {
+        } else if (supreme.length > 6){
+            binding.layoutSupreme.error = "Invalid supreme court license"
+        }else if (supreme.length < 6) {
+            binding.layoutSupreme.error = "Invalid supreme court license"
+        }
+        else {
             array.add(general)
             array.add(high)
             array.add(supreme)

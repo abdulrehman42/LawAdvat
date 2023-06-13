@@ -149,7 +149,7 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                 } else {
-                    Toast.makeText(this@ChatActivity, "data not found", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ChatActivity, "data ", Toast.LENGTH_SHORT).show()
                 }
             }
 

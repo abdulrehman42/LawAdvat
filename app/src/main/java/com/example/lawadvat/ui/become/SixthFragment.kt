@@ -88,7 +88,23 @@ class SixthFragment : Fragment() {
         val low = binding.itemForth4.text.toString().trim()
         if (high.isEmpty()) {
             binding.layoutFirst1.error = "Please fill this field"
-        } else {
+        }/*else if(medium.isEmpty()){
+            array.add(high)
+            array.add("--")
+            array.add(enter_mediumee)
+            array.add(low)
+        }else if(enter_mediumee.isEmpty()){
+            array.add(high)
+            array.add(medium)
+            array.add("--")
+            array.add(low)
+        }else if(low.isEmpty()){
+            array.add(high)
+            array.add(medium)
+            array.add(enter_mediumee)
+            array.add("--")
+        }*/
+        else {
             array.add(high)
             array.add(medium)
             array.add(enter_mediumee)

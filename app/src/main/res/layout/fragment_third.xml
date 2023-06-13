@@ -38,6 +38,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
+                app:counterEnabled="true"
+                app:counterMaxLength="06"
                 tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:hint="General License"
                     android:clickable="false"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +60,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:hintTextColor="@color/teal_700"
                 app:boxStrokeColor="@color/teal_700"
+                app:counterEnabled="true"
+                app:counterMaxLength="06"
                 tools:ignore="UnusedAttribute">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -65,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="High Court License"
-                    android:inputType="text" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,6 +80,8 @@
                 app:errorEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:hintTextColor="@color/teal_700"
+                app:counterEnabled="true"
+                app:counterMaxLength="06"
                 app:boxStrokeColor="@color/teal_700"
                 tools:ignore="UnusedAttribute">
 
@@ -84,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Supreme Court License"
-                    android:inputType="text" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
