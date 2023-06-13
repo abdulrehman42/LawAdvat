@@ -1,11 +1,7 @@
 package com.example.lawadvat.ui.appintment.appointment
 
-import GMailSender
 import android.R
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -14,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.lawadvat.databinding.ActivityAppointmentBinding
 import com.example.lawadvat.ui.Variablecontain
+import com.example.lawadvat.ui.mail.SendMailTask
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.harrywhewell.scrolldatepicker.OnDateSelectedListener
@@ -92,89 +89,46 @@ class Appointment : AppCompatActivity() {
                 name_lawyer =name, lawyer_img = img,
                 fee =fee, lawyer_location = location,
                 client_name = user,
-                client_img = user_img, check = "false", time ="$hour:$minute:$value", date = date.toString()))
+
+                client_img = user_img, check = "false", time ="$hour:$minute:$value", date = date.toString(), lawyer_email = email))
             myRef1.setValue(Appoint(
                 name_lawyer =name, lawyer_img = img,
                 fee =fee, lawyer_location = location,
                 client_name = user,
                 client_img = user_img, check = "false",
-                time ="$hour:$minute:$value", date = date.toString()))
-           /* send_Email(user_name?.email.toString(),"rehman1965@",email.toString(),"New Appointment",
-                user_name?.displayName.toString()
-            )*/
-        //    sendEmail()
-            //Toast.makeText(this, "$hour:$minute$value $date",Toast.LENGTH_SHORT).show()
-           /* val intent=Intent(this,HireProfile::class.java)
-            startActivity(intent)*/
+                time ="$hour:$minute:$value", date = date.toString(),lawyer_email = email))
+            val msg="Hi $name,\n Congratulations! Your new appointment has arrived." +
+                    "\n ${user_name?.displayName.toString()} has sent you a appointment request.\n open the Lawadvat App"
+            send_Email(email.toString(),
+                msg
+            )
+
             finish()
         }
     }
     private fun send_Email(
-        Sender: String,
-        Password: String,
         Receiver: String,
-        Title: String,
         Message: String
     ) {
         Thread {
             try {
-                val sender = GMailSender(Sender, Password)
-                sender.sendMail(Title, "<b>$Message</b>", Sender, Receiver)
+
+                val sm = SendMailTask(
+                    this@Appointment,
+                    "abdulrehman4241566@gmail.com",
+                    Receiver,
+                    "Appointment Confirmation",
+                    Message,
+                    "dtzxlvtlubqpigny"
+                )
+                sm.sendMail()
                 /*Toast.makeText(this, "Mail send.", Toast.LENGTH_SHORT).show()*/
             } catch (e: Exception) {
                 Log.e("SendMail", e.message, e)
             }
         }.start()
     }
-    private fun sendEmail() {
-        val email=intent.getStringExtra(Variablecontain.email)
-        val selectorIntent = Intent(Intent.ACTION_SENDTO)
-        val urlString = "mailto:" + Uri.encode(email.toString()) + "?subject=" + Uri.encode("Feedback") + "&body=" + Uri.encode("")
-        selectorIntent.data = Uri.parse(urlString)
 
-        /* val emailIntent = Intent(Intent.ACTION_SEND)
-         emailIntent.putExtra(Intent.EXTRA_EMAIL, "hammadrfq3@gmail.com")
-         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your valuable feedback")
-         emailIntent.putExtra(Intent.EXTRA_TEXT, "")
-         emailIntent.selector = selectorIntent*/
-
-        try {
-            startActivity(Intent.createChooser(selectorIntent, "Send email..."))
-        } catch (ex: ActivityNotFoundException) {
-            Toast.makeText(this, "There is no email client installed.", Toast.LENGTH_SHORT).show()
-        }
-    }
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun send_email() {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("abdulrehman4241566@gmail.com")
-            putExtra(Intent.EXTRA_EMAIL, "aligee5716@gmail.com")
-            putExtra(Intent.EXTRA_SUBJECT, "Appointment")
-            putExtra(Intent.EXTRA_TEXT, "Hey Abdul rehman")
-        }
-        val packageManager = this.packageManager
-        val activities = packageManager.queryIntentActivities(intent, 0)
-
-        if (activities.isNotEmpty()) {
-            val chooserIntent = Intent.createChooser(intent, "Send Email")
-            startActivity(chooserIntent)
-        } else {
-            val webIntent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:aligee5716@gmail.com?subject=${Uri.encode("Appointment")}&body=${Uri.encode("Hey Abdul rehman")}")
-            }
-            if (webIntent.resolveActivity(packageManager) != null) {
-                startActivity(webIntent)
-            } else {
-                Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show()
-            }
-        }
-       /* val chooserIntent = Intent.createChooser(intent, "Send Email")
-        if (intent.resolveActivity(this.packageManager) != null) {
-            startActivity(chooserIntent)
-        } else {
-            Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show()
-        }*/
-    }
 
     @SuppressLint("SetTextI18n")
     private fun in_it() {

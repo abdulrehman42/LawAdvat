@@ -31,8 +31,6 @@ class DashboardFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         activity?.window?.statusBarColor = requireActivity().getColor(R.color.white);
-        val dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding= FragmentDashboardBinding.inflate(layoutInflater)
         binding.swipeRefreshLayout.setOnRefreshListener {
             in_it()

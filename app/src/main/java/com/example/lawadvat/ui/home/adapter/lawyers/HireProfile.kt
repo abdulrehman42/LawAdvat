@@ -63,10 +63,12 @@ class HireProfile : AppCompatActivity() {
             val layer_id=intent.getStringExtra(Variablecontain.id)
             val name=intent.getStringExtra(Variablecontain.name)
             val img=intent.getStringExtra(Variablecontain.img)
+            val email=intent.getStringExtra(Variablecontain.email)
             val intent=Intent(this,ChatActivity::class.java)
             intent.putExtra(Variablecontain.name,name)
             intent.putExtra(Variablecontain.id,layer_id)
             intent.putExtra(Variablecontain.img2,img)
+            intent.putExtra(Variablecontain.email,email)
             startActivity(intent)
         }
     }

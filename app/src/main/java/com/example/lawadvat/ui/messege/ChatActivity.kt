@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.ActivityChatBinding
 import com.example.lawadvat.ui.Variablecontain
+import com.example.lawadvat.ui.mail.SendMailTask
 import com.example.lawadvat.ui.messege.adapter.MessegeAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -77,26 +79,27 @@ class ChatActivity : AppCompatActivity() {
             }
         }
         val reciver_id = intent.getStringExtra(Variablecontain.reciver_id)
+        val email=intent.getStringExtra(Variablecontain.email)
         binding.sendMessageVector.setOnClickListener {
             val messege = binding.sendMesssage.text.toString()
             if (messege.isNotEmpty()) {
                 if (layer_id?.isNotEmpty() == true) {
                     if (reciver_img != null) {
                         val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-                        msg_send(layer_id, name, reciver_img, messege, time)
+                        msg_send(layer_id, name, reciver_img, messege, time,email)
                     } else {
                         val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-                        msg_send(layer_id, name, img, messege, time)
+                        msg_send(layer_id, name, img, messege, time, email)
                     }
 
 
                 } else {
                     if (img != null) {
                         val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-                        msg_send(reciver_id, name, img, messege, time)
+                        msg_send(reciver_id, name, img, messege, time, email)
                     } else {
                         val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
-                        msg_send(reciver_id, name, reciver_img, messege, time)
+                        msg_send(reciver_id, name, reciver_img, messege, time, email)
                     }
 
                 }
@@ -162,7 +165,8 @@ class ChatActivity : AppCompatActivity() {
         name: String?,
         img: String?,
         messege: String,
-        time: String
+        time: String,
+        email: String?
     ) {
         val sender_id = intent.getStringExtra(Variablecontain.sender_id)
         val database = FirebaseDatabase.getInstance().reference
@@ -183,13 +187,46 @@ class ChatActivity : AppCompatActivity() {
                 .setValue(current_user)
             database.child(sender_id.toString()).child(user).child((num + 1).toString())
                 .setValue(current_user)
+            val msg="Hi $user,\n $name sent you message \n" +
+                    " open the Lawadvat App"
+            send_Email(email.toString(),
+                msg
+            )
         }else
         {
             database.child(user_id).child(name.toString()).child((num + 1).toString())
                 .setValue(current_user)
             database.child(layerId.toString()).child(user).child((num + 1).toString())
                 .setValue(current_user)
+            val msg="Hi $name,\n $user sent you message \n" +
+                    " open the Lawadvat App"
+
+            send_Email(email.toString(),
+                msg
+            )
         }
 
+    }
+    private fun send_Email(
+        Receiver: String,
+        Message: String
+    ) {
+        Thread {
+            try {
+
+                val sm = SendMailTask(
+                    this@ChatActivity,
+                    "abdulrehman4241566@gmail.com",
+                    Receiver,
+                    "Message",
+                    Message,
+                    "dtzxlvtlubqpigny"
+                )
+                sm.sendMail()
+                /*Toast.makeText(this, "Mail send.", Toast.LENGTH_SHORT).show()*/
+            } catch (e: Exception) {
+                Log.e("SendMail", e.message, e)
+            }
+        }.start()
     }
 }

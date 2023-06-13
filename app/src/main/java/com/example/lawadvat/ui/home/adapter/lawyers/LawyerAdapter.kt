@@ -17,7 +17,7 @@ import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.become.entity.Requirement
 
 
-class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):RecyclerView.Adapter<LawyerAdapter.Holder>() {
+class LawyerAdapter(val context:Context?, var list: ArrayList<Requirement?>):RecyclerView.Adapter<LawyerAdapter.Holder>() {
     class Holder(val v:View):RecyclerView.ViewHolder(v)
     {
         val name=v.findViewById<TextView>(R.id.name)
@@ -42,9 +42,11 @@ class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):Recy
         holder.name.text=l?.name
         holder.des.text=l?.description
         holder.fee.text=l?.fee+"PKR"
-        Glide.with(context)
-            .load(l?.img)
-            .into(holder.img)
+        if (context != null) {
+            Glide.with(context)
+                .load(l?.img)
+                .into(holder.img)
+        }
         holder.button.setOnClickListener {
             /*val bundle=Bundle()
             val hirelawyer=HireLawyer()
@@ -63,7 +65,7 @@ class LawyerAdapter(val context:Context, var list: ArrayList<Requirement?>):Recy
             intent.putExtra(Variablecontain.case3,l?.third_specilize)
             intent.putExtra(Variablecontain.case4,l?.fourth_specilize)
             intent.putExtra(Variablecontain.id,l?.id)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
     @SuppressLint("NotifyDataSetChanged")

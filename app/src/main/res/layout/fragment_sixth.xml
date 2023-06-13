@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:hint="LLB from *"
+                    android:hint="LLB from institute*"
                     android:inputType="text"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +63,7 @@
                     android:id="@+id/item_second2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="LLM from"
+                    android:hint="LLM from institute"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,7 +82,7 @@
                     android:id="@+id/item_third3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Bar of Law from"
+                    android:hint="Bar of Law from institute"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +100,7 @@
                     android:id="@+id/item_forth4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="P.H.D from"
+                    android:hint="P.H.D from institute"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 

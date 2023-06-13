@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.appintment.appointment.Appoint
+import com.example.lawadvat.ui.mail.SendMailTask
 import com.example.lawadvat.ui.messege.Messege
 import com.example.lawadvat.ui.review.ReviewActivity
 import com.example.lawadvat.ui.review.Review_entity
@@ -202,10 +204,15 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                 Handler(Looper.getMainLooper()).postDelayed({
                     notifyDataSetChanged()
                     Toast.makeText(context," please the page Refresh",Toast.LENGTH_SHORT).show()
+                    val msg="Hi ${l.name_lawyer},\n Congratulations! Your appointment has benn Started with $user."
+                    send_Email(l.lawyer_email.toString(),
+                        msg
+                    )
                 }, 100)
             }
 
         }
+
         holder.reject_btn.setOnClickListener {
             update_database(
                 l.client_name,
@@ -226,7 +233,29 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
         }
 
     }
-
+    private fun send_Email(
+        Receiver: String,
+        Message: String
+    ) {
+        Thread {
+            try {
+                /* val sender = GMailSender(this,"abdulrehman4241566@gmail.com", "1965rehman")
+                 sender.sendMail("New Appointment", Message, recipient = Receiver)*/
+                val sm = SendMailTask(
+                    context,
+                    "abdulrehman4241566@gmail.com",
+                    Receiver,
+                    "Appointment Confirmation",
+                    Message,
+                    "dtzxlvtlubqpigny"
+                )
+                sm.sendMail()
+                /*Toast.makeText(this, "Mail send.", Toast.LENGTH_SHORT).show()*/
+            } catch (e: Exception) {
+                Log.e("SendMail", e.message, e)
+            }
+        }.start()
+    }
     private fun check_condition(name: String) {
         val database=FirebaseDatabase.getInstance().reference
         database.child("review").child(name).addValueEventListener(object :

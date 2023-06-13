@@ -9,5 +9,6 @@ data class Appoint(
     val client_name:String?=null,
     val client_img:String?=null,
     val time:String?=null,
-    val date:String?=null
+    val date:String?=null,
+    val lawyer_email:String?=null
 )

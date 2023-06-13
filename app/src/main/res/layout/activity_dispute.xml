@@ -33,6 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginStart="04dp"
                     android:fontFamily="serif"
                     android:gravity="center"
                     android:text="Name"
@@ -46,8 +47,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="How was your experience with them? "
+                    android:text="What is their matter due to which you are filing an dispute against them? "
                     android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/report_profile"
                     app:layout_constraintTop_toBottomOf="@+id/repot_name" />
 
@@ -71,7 +74,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Write dispute"
+                    android:hint="Write Reason"
                     android:id="@+id/repot_text"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/report_btn"

@@ -2,6 +2,7 @@ package com.example.lawadvat.ui.become
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentSeventhBinding
 import com.example.lawadvat.ui.become.entity.Requirement
+import com.example.lawadvat.ui.mail.SendMailTask
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -204,7 +206,7 @@ class SeventhFragmen : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
         val user_img=FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
         val myRef = database.getReference("Lawyer").child(user)
-        if (array[20].isEmpty()){
+    /*    if (array[20].isEmpty()){
             myRef.setValue(Requirement(
                 img =user_img,
                 name = array[0], email = array[1], phone = array[2],
@@ -228,14 +230,29 @@ class SeventhFragmen : Fragment() {
                 layer = true))
         }
         else
-        {
+        {*/
             myRef.setValue(Requirement(
                 img =user_img,
                 name = array[0], email = array[1], phone = array[2],
                 cnic = array[3], gender = array[4],
                 country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22], id = user_id,
                 layer = true))
-        }
+            val msg="Hi $n,\n We would like to express our sincere appreciation for registering as a lawyer with LawAdvat. We are delighted to welcome you to our platform, connecting legal professionals with clients in need of legal expertise.\n" +
+                    "\n" +
+                    "By joining LawAdvat, you have taken a significant step towards expanding your professional reach and providing your legal services to a wider audience. Our platform offers a seamless and user-friendly experience for both lawyers and clients, facilitating efficient communication and fostering meaningful connections.\n" +
+                    "\n" +
+                    "As a registered lawyer on LawAdvat, you now have the opportunity to showcase your expertise, build your online presence, and engage with potential clients who are actively seeking legal assistance. This presents a remarkable avenue for you to expand your client base and make a positive impact in the legal community.\n" +
+                    "\n" +
+                    "We are committed to supporting you throughout your journey with LawAdvat. Should you have any questions, encounter any challenges, or require any assistance, our dedicated support team is always here to help. We strive to continuously enhance our platform and provide you with the tools and resources needed to succeed.\n" +
+                    "\n" +
+                    "Once again, we extend our gratitude for choosing LawAdvat as your platform of choice. We are confident that our partnership will be mutually beneficial, and we look forward to witnessing your achievements as a valued member of our legal community.\n" +
+                    "\n" +
+                    "If you have any further inquiries or suggestions, please feel free to reach out to us. We value your feedback and are committed to delivering the best possible experience for you and our esteemed clients."
+
+            send_Email(e,
+                msg
+            )
+       // }
          val editor =
             requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
         editor.putBoolean("lawyer", true)
@@ -325,5 +342,27 @@ class SeventhFragmen : Fragment() {
             binding.itemThirdstudy.setText(array1[21])
             binding.itemForthstudy.setText(array1[22])
         }
+    }
+    private fun send_Email(
+        Receiver: String,
+        Message: String
+    ) {
+        Thread {
+            try {
+
+                val sm = SendMailTask(
+                    context,
+                    "abdulrehman4241566@gmail.com",
+                    Receiver,
+                    "Thank You for Registering with LawAdvat",
+                    Message,
+                    "dtzxlvtlubqpigny"
+                )
+                sm.sendMail()
+                /*Toast.makeText(this, "Mail send.", Toast.LENGTH_SHORT).show()*/
+            } catch (e: Exception) {
+                Log.e("SendMail", e.message, e)
+            }
+        }.start()
     }
 }

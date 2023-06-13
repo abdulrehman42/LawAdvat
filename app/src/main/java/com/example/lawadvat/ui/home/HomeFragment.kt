@@ -75,6 +75,7 @@ class HomeFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Lawyer")
         database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
                 for (postSnapshot in snapshot.children) {
                     val result: Requirement? =postSnapshot.getValue(Requirement::class.java)!!
                     list.add(result)
@@ -114,10 +115,10 @@ class HomeFragment : Fragment() {
     }
     @SuppressLint("NotifyDataSetChanged")
     private fun recyclerview_hire(list: ArrayList<Requirement?>) {
-        val adapter=LawyerAdapter(requireContext(),list)
+        val adapter=LawyerAdapter(context,list)
         binding.lawyerRecyclerview.setHasFixedSize(true)
         binding.lawyerRecyclerview.layoutManager = LinearLayoutManager(
-            requireContext(),
+            context,
             LinearLayoutManager.VERTICAL,
             false
         )
