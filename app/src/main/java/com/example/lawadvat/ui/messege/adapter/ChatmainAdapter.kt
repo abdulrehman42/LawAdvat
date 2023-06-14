@@ -64,6 +64,7 @@ class ChatmainAdapter(val context: Context?, val list: ArrayList<Messege?>):Recy
                     intent.putExtra(Variablecontain.name, l?.sender_name)
                     intent.putExtra(Variablecontain.sender_id, l?.sender_id)
                     intent.putExtra(Variablecontain.reciver_id, l?.reciver_id)
+                    intent.putExtra(Variablecontain.email,l.email)
                     intent.putExtra(Variablecontain.reciver_img,l.sender_image)
                     context?.startActivity(intent)
                 }

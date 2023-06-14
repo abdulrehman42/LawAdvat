@@ -113,6 +113,17 @@ class SearchActivity : AppCompatActivity() {
                     editor.putString("search_name", "supreme_court_id")
                     editor.apply()
                 }
+
+                R.id.search_by_city -> {
+                    editor.putString("search_name", "city")
+                    editor.apply()
+
+                }
+
+                R.id.search_by_supreme_id -> {
+                    editor.putString("search_name", "supreme_court_id")
+                    editor.apply()
+                }
             }
             true
         }
@@ -139,6 +150,7 @@ class SearchActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this@SearchActivity, "No Results", Toast.LENGTH_SHORT).show()
                     }
+
                     recyclerview(searchResults)
                 }
 

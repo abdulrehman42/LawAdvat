@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@+id/search_by_name" android:title="by name"/>
     <item android:id="@+id/search_by_location" android:title="by location"/>
+    <item android:id="@+id/search_by_city" android:title="by city"/>
     <item android:id="@+id/search_by_phone" android:title="by phone"/>
     <item android:id="@+id/search_by_email" android:title="by email"/>
     <item android:id="@+id/search_by_general_id" android:title="by general_id"/>

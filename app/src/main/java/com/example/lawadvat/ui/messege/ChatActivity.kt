@@ -40,6 +40,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
     private var mInterstitialAd: InterstitialAd? = null
     val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+    val user_email = FirebaseAuth.getInstance().currentUser?.email.toString()
     val user_id = FirebaseAuth.getInstance().currentUser?.uid.toString()
     val user_pic = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
     var num = 0
@@ -234,7 +235,8 @@ class ChatActivity : AppCompatActivity() {
             sender_id = user_id,
             reciver_id = layerId,
             text = messege,
-            time = time
+            time = time,
+            email = email
         )
         //      val reciver_side=Messege(sender_name = name, sender_id = user_id, reciver_id = layerId,text = messege, time = time)
         if (sender_id!=null && sender_id!=user_id)
@@ -255,10 +257,21 @@ class ChatActivity : AppCompatActivity() {
             )
         }else
         {
+            val current_user1 = Messege(
+                sender_name = user,
+                sender_image = user_pic,
+                reciver_image = img,
+                reciver_name = name,
+                sender_id = user_id,
+                reciver_id = layerId,
+                text = messege,
+                time = time,
+                email = user_email
+            )
             database.child(user_id).child(name.toString()).child((num + 1).toString())
-                .setValue(current_user)
+                .setValue(current_user1)
             database.child(layerId.toString()).child(user).child((num + 1).toString())
-                .setValue(current_user)
+                .setValue(current_user1)
             val msg="Hi $name,\n $user sent you message \n" +
                     " open the Lawadvat App"
             if (mInterstitialAd != null) {

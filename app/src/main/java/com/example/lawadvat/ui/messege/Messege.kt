@@ -1,5 +1,7 @@
 package com.example.lawadvat.ui.messege
 
+import android.provider.ContactsContract.CommonDataKinds.Email
+
 data class Messege(
     val sender_name:String?=null,
     val sender_image:String?=null,
@@ -9,4 +11,5 @@ data class Messege(
     val reciver_id:String?=null,
     val time:String?=null,
     val text:String?=null,
+    val email:String?=null,
 )
