@@ -126,7 +126,7 @@ class LawyerProfile : Fragment() {
 
                         }
                     }else{
-                        Toast.makeText(requireContext(),"Not found lawyer data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,"Not found lawyer data", Toast.LENGTH_SHORT).show()
                     }
                 //}
 
@@ -196,7 +196,7 @@ class LawyerProfile : Fragment() {
             val editor = requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
             editor.putBoolean("lawyer", false)
             editor.apply()
-            Toast.makeText(requireContext(), "no result", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "no result", Toast.LENGTH_SHORT).show()
         }
 
     }

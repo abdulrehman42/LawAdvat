@@ -54,7 +54,7 @@ class SendMailTask(
                     mm.subject = subject
                     mm.setText(message)
                     Transport.send(mm)
-                    showToastOnMainThread("Email sent successfully!")
+                  //  showToastOnMainThread("Email sent successfully!")
                 } catch (e: AuthenticationFailedException) {
                     showToastOnMainThread("There is an error in either email id or Google app password. Please check them carefully")
                 } catch (e: MessagingException) {

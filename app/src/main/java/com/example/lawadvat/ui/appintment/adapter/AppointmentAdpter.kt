@@ -38,6 +38,7 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
     var checkit:Boolean=false
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val user = firebaseAuth.currentUser?.displayName.toString()
+    val user_email = firebaseAuth.currentUser?.email.toString()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val card_lawyer = view.findViewById<CardView>(R.id.lawyer_appointmen_cardview)
@@ -200,6 +201,10 @@ class AppointmentAdpter(val context: Context?, var list: ArrayList<Appoint?>) :
                     l.date,
                     l.lawyer_location,
                     l.time
+                )
+                val msg="Hi $user,\n Congratulations! Your appointment has benn Started with ${l.name_lawyer}."
+                send_Email(user_email,
+                    msg
                 )
                 Handler(Looper.getMainLooper()).postDelayed({
                     notifyDataSetChanged()
