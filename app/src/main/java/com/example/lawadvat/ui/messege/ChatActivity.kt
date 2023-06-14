@@ -1,6 +1,7 @@
 package com.example.lawadvat.ui.messege
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -20,6 +21,12 @@ import com.example.lawadvat.databinding.ActivityChatBinding
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.mail.SendMailTask
 import com.example.lawadvat.ui.messege.adapter.MessegeAdapter
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,6 +38,7 @@ import java.time.format.DateTimeFormatter
 
 class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
+    private var mInterstitialAd: InterstitialAd? = null
     val user = FirebaseAuth.getInstance().currentUser?.displayName.toString()
     val user_id = FirebaseAuth.getInstance().currentUser?.uid.toString()
     val user_pic = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
@@ -44,8 +52,7 @@ class ChatActivity : AppCompatActivity() {
         this.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.custom_actionbar)
-        //getSupportActionBar().setElevation(0);
-        //getSupportActionBar().setElevation(0);
+        ad_load()
         val view: View = supportActionBar!!.customView
         val nametext = view.findViewById<TextView>(R.id.text_actionbar)
         val actionimg = view.findViewById<ImageView>(R.id.image_actionbar)
@@ -111,6 +118,55 @@ class ChatActivity : AppCompatActivity() {
                 in_it()
 
             }, 100)
+
+        }
+    }
+
+    private fun ad_load() {
+        var adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-3940256099942544/1033173712",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG, adError?.toString()!!)
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                }
+            })
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdClicked() {
+                // Called when a click is recorded for an ad.
+                Log.d(TAG, "Ad was clicked.")
+            }
+
+            override fun onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                Log.d(TAG, "Ad dismissed fullscreen content.")
+                mInterstitialAd = null
+            }
+
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                // Called when ad fails to show.
+                Log.e(TAG, "Ad failed to show fullscreen content.")
+                mInterstitialAd = null
+            }
+
+            override fun onAdImpression() {
+                // Called when an impression is recorded for an ad.
+                Log.d(TAG, "Ad recorded an impression.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                Log.d(TAG, "Ad showed fullscreen content.")
+            }
 
         }
     }
@@ -189,6 +245,11 @@ class ChatActivity : AppCompatActivity() {
                 .setValue(current_user)
             val msg="Hi $user,\n $name sent you message \n" +
                     " open the Lawadvat App"
+            if (mInterstitialAd != null) {
+                mInterstitialAd?.show(this)
+            } else {
+                Log.d("TAG", "The interstitial ad wasn't ready yet.")
+            }
             send_Email(email.toString(),
                 msg
             )
@@ -200,7 +261,11 @@ class ChatActivity : AppCompatActivity() {
                 .setValue(current_user)
             val msg="Hi $name,\n $user sent you message \n" +
                     " open the Lawadvat App"
-
+            if (mInterstitialAd != null) {
+                mInterstitialAd?.show(this)
+            } else {
+                Log.d("TAG", "The interstitial ad wasn't ready yet.")
+            }
             send_Email(email.toString(),
                 msg
             )
@@ -229,4 +294,6 @@ class ChatActivity : AppCompatActivity() {
             }
         }.start()
     }
+
+
 }
