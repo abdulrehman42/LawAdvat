@@ -77,7 +77,7 @@ class ThirdFragment : Fragment() {
         }else if (general.length < 6) {
             binding.layoutGeneral.error = "Invalid general license"
         }
-        else if (high.isEmpty()) {
+       /* else if (high.isEmpty()) {
             binding.layoutHigh.error = "Please fill this field"
         }else if (high.length > 6){
             binding.layoutHigh.error = "Invalid Highcourt license"
@@ -90,7 +90,7 @@ class ThirdFragment : Fragment() {
             binding.layoutSupreme.error = "Invalid supreme court license"
         }else if (supreme.length < 6) {
             binding.layoutSupreme.error = "Invalid supreme court license"
-        }
+        }*/
         else {
             array.add(general)
             array.add(high)
