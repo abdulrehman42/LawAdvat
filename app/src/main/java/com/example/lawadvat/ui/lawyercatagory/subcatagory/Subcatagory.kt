@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lawadvat.databinding.ActivitySubcatagoryBinding
 import com.example.lawadvat.ui.Variablecontain
 import com.example.lawadvat.ui.become.entity.Requirement
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -23,15 +22,15 @@ class Subcatagory : AppCompatActivity() {
         setContentView(binding.root)
         val data=intent.getStringExtra(Variablecontain.data)
         supportActionBar?.title=data.toString()
-        in_it()
+        in_it("first_specilize")
     }
 
-    private fun in_it() {
+    private fun in_it(ss: String) {
         val data=intent.getStringExtra(Variablecontain.data)
         val objectList=ArrayList<Requirement?>()
         val databaseReference = FirebaseDatabase.getInstance().getReference("Lawyer")
         val s="criminal"
-        val query: Query = databaseReference.orderByChild("first_specilize").equalTo(data.toString())
+        val query: Query = databaseReference.orderByChild(ss).equalTo(data.toString())
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -43,6 +42,7 @@ class Subcatagory : AppCompatActivity() {
                         recyclerview_hire(objectList)
                     }
                 }else{
+                   //in_it("second_specilize")
                     Toast.makeText(this@Subcatagory,"Lawyer not Available",Toast.LENGTH_SHORT).show()
                 }
             }

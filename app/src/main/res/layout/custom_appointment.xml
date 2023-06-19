@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        app:cardElevation="10dp"
         android:id="@+id/lawyer_appointmen_cardview"
         app:cardCornerRadius="15dp"
         android:layout_margin="05dp">
@@ -187,6 +188,7 @@
             android:padding="10dp"
             android:layout_gravity="top"
             android:id="@+id/client_appointmen_cardview"
+            app:cardElevation="10dp"
             app:cardCornerRadius="15dp"
             android:layout_margin="05dp">
             <LinearLayout

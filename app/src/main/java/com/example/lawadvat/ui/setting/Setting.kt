@@ -80,7 +80,7 @@ class Setting : Fragment() {
                 startActivity(intent)
             }
         }
-        binding.complain.setOnClickListener{
+        /*binding.complain.setOnClickListener{
             if (auth.currentUser!=null)
             {
                 Snackbar.make(requireView(),"we working on it",Snackbar.LENGTH_SHORT).show()
@@ -90,7 +90,7 @@ class Setting : Fragment() {
                 val intent=Intent(requireActivity(),Signup::class.java)
                 startActivity(intent)
             }
-        }
+        }*/
         return binding.root
     }
 

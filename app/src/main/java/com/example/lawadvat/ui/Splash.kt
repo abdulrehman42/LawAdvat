@@ -97,7 +97,6 @@ class Splash : AppCompatActivity() {
     }
     fun get_profile()
     {
-
         databaseRef.child("Lawyer").child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                             val result: Requirement? =

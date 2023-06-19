@@ -17,8 +17,6 @@ import com.example.lawadvat.R
 import com.example.lawadvat.databinding.FragmentLawyerProfileBinding
 import com.example.lawadvat.ui.become.SeventhFragmen
 import com.example.lawadvat.ui.become.entity.Requirement
-import com.example.lawadvat.ui.home.adapter.ListItem
-import com.example.lawadvat.ui.home.adapter.SpecilizeRecyclerviw
 import com.example.lawadvat.ui.review.Review_entity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -66,9 +64,9 @@ class LawyerProfile : Fragment() {
                     }
                     recyclerview_review(list)
                 }
-                /*else{
+                else{
                     binding.noReview.isVisible=true
-                }*/
+                }
                 lets_start(context)
             }
             override fun onCancelled(error: DatabaseError) {
@@ -151,7 +149,7 @@ class LawyerProfile : Fragment() {
             binding.review.text="($review)"
             binding.appoint.text="($appoint)"
             binding.location.text = array.office_location.toString()
-            binding.experience.text = "Experience:"+array.experince.toString()
+            binding.experience.text = "("+array.experince.toString()+")"
             binding.first.text = "\u25BA"+array.first_specilize.toString()
             binding.second.text = "\u25BA"+array.second_specilize.toString()
             binding.third.text = "\u25BA"+array.third_specilize.toString()
