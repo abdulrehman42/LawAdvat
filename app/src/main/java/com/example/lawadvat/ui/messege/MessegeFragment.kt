@@ -40,7 +40,7 @@ class MessegeFragment : Fragment() {
     private fun in_it() {
         //val name=intent.getStringExtra(Variablecontain.name)
         val user_id=FirebaseAuth.getInstance().currentUser?.uid.toString()
-        database = FirebaseDatabase.getInstance().getReference(user_id)
+        database = FirebaseDatabase.getInstance().getReference("message").child(user_id)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list= ArrayList<Messege?>()

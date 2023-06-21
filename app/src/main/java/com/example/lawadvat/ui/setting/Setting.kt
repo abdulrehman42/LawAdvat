@@ -3,6 +3,8 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,13 +46,9 @@ class Setting : Fragment() {
             .into(binding.profileSetting)
 
         binding.logout.setOnClickListener{
-            auth.signOut()
-            val editor =
-                requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
-            editor.putBoolean("lawyer", false)
-            editor.apply()
-            val intent=Intent(requireActivity(),MainActivity::class.java)
-            startActivity(intent)
+            Handler(Looper.getMainLooper()).postDelayed({
+                log_out()
+            },1000)
         }
         binding.feedback.setOnClickListener{
             sendEmail()
@@ -93,6 +91,15 @@ class Setting : Fragment() {
         }*/
         return binding.root
     }
+
+    private fun log_out() {
+        auth.signOut()
+        val editor =
+            requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
+        editor.putBoolean("lawyer", false)
+        editor.apply()
+        val intent=Intent(requireActivity(),MainActivity::class.java)
+        startActivity(intent)    }
 
     private fun sendEmail() {
 

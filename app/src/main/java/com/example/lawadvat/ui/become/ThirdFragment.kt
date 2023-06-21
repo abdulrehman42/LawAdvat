@@ -76,6 +76,55 @@ class ThirdFragment : Fragment() {
             binding.layoutGeneral.error = "Invalid general license"
         }else if (general.length < 6) {
             binding.layoutGeneral.error = "Invalid general license"
+        }else if (high.isEmpty() && supreme.isEmpty())
+        {
+            array.add(general)
+            array.add("--")
+            array.add("--")
+            val bundle = Bundle()
+            bundle.putSerializable("key", array)
+            val forthFragment = ForthFragment()
+            forthFragment.arguments = bundle
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+                ?.addToBackStack(null)
+                ?.commit()
+        }else if (high.isEmpty()){
+            if (supreme.length > 6){
+                binding.layoutSupreme.error = "Invalid supreme court license"
+            }else if (supreme.length < 6) {
+                binding.layoutSupreme.error = "Invalid supreme court license"
+            }else {
+                array.add(general)
+                array.add("--")
+                array.add(supreme)
+                val bundle = Bundle()
+                bundle.putSerializable("key", array)
+                val forthFragment = ForthFragment()
+                forthFragment.arguments = bundle
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+            }
+        }else if ( supreme.isEmpty()){
+            if (high.length > 6){
+                binding.layoutHigh.error = "Invalid high court license"
+            }else if (high.length < 6) {
+                binding.layoutHigh.error = "Invalid high court license"
+            }else {
+                array.add(general)
+                array.add(high)
+                array.add("--")
+                val bundle = Bundle()
+                bundle.putSerializable("key", array)
+                val forthFragment = ForthFragment()
+                forthFragment.arguments = bundle
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+            }
         }
        /* else if (high.isEmpty()) {
             binding.layoutHigh.error = "Please fill this field"
@@ -91,7 +140,7 @@ class ThirdFragment : Fragment() {
         }else if (supreme.length < 6) {
             binding.layoutSupreme.error = "Invalid supreme court license"
         }*/
-        else {
+        /*else {
             array.add(general)
             array.add(high)
             array.add(supreme)
@@ -103,7 +152,7 @@ class ThirdFragment : Fragment() {
                 ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
                 ?.addToBackStack(null)
                 ?.commit()
-        }
+        }*/
     }
     fun alternative(array:java.util.ArrayList<String>) {
         val n = binding.itemGeneral.text.toString()

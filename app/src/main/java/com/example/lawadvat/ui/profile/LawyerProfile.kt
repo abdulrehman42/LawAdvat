@@ -176,20 +176,43 @@ class LawyerProfile : Fragment() {
                     ?.addToBackStack(null)
                     ?.commit()
             }
-            if (array.llm.equals("--")) {
+            if (array.llm.equals("--")&&array.bar_of_law.equals("--")&&array.phd.equals("--") ) {
                 binding.secondEd.isVisible = false
-            } else if (array.bar_of_law.equals("--")) {
                 binding.thirdEd.isVisible = false
-            } else if (array.phd.equals("--")) {
                 binding.fourthEd.isVisible = false
-            } else {
+            } else if (array.llm.equals("--")&&array.bar_of_law.equals("--")) {
+                binding.secondEd.isVisible = false
+                binding.thirdEd.isVisible = false
+                binding.fourthEd.text = "\u25BA"+array.phd.toString()
+            } else if (array.llm.equals("--")&&array.phd.equals("--")) {
+                binding.secondEd.isVisible = false
+                binding.fourthEd.isVisible = false
+                binding.thirdEd.text = "\u25BA"+array.bar_of_law.toString()
+            }else if (array.bar_of_law.equals("--")&&array.phd.equals("--")) {
+                binding.thirdEd.isVisible = false
+                binding.fourthEd.isVisible = false
+                binding.secondEd.text = "\u25BA"+array.llm.toString()
+            }else if (array.llm.equals("--")) {
+                binding.secondEd.isVisible = false
+                binding.thirdEd.text = "\u25BA"+array.bar_of_law.toString()
+                binding.fourthEd.text = "\u25BA"+array.phd.toString()
+            }else if (array.bar_of_law.equals("--")) {
+                binding.thirdEd.isVisible = false
+                binding.secondEd.text = "\u25BA"+array.llm.toString()
+                binding.fourthEd.text = "\u25BA"+array.phd.toString()
+            }else if (array.phd.equals("--")) {
+                binding.fourthEd.isVisible = false
+                binding.thirdEd.text = "\u25BA"+array.bar_of_law.toString()
+                binding.secondEd.text = "\u25BA"+array.llm.toString()
+            }
+        /* else {
                 binding.thirdEd.isInvisible = false
                 binding.thirdEd.text = "\u25BA"+array.bar_of_law.toString()
                 binding.secondEd.isInvisible = false
                 binding.secondEd.text = "\u25BA"+array.llm.toString()
                 binding.fourthEd.isInvisible = false
                 binding.fourthEd.text = "\u25BA"+array.phd.toString()
-            }
+            }*/
         } else {
             val editor = requireActivity().getSharedPreferences("MY_PREFS_NAME", AppCompatActivity.MODE_PRIVATE).edit()
             editor.putBoolean("lawyer", false)

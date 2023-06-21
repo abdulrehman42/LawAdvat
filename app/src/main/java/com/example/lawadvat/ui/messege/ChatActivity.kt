@@ -193,7 +193,7 @@ class ChatActivity : AppCompatActivity() {
     private fun in_it() {
         //val layer_id=intent.getStringExtra(Variablecontain.id)
         val name = intent.getStringExtra(Variablecontain.name)
-        val database = FirebaseDatabase.getInstance().getReference(user_id)
+        val database = FirebaseDatabase.getInstance().getReference("message").child(user_id)
         database.child(name.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list = ArrayList<Messege?>()
@@ -226,7 +226,7 @@ class ChatActivity : AppCompatActivity() {
         email: String?
     ) {
         val sender_id = intent.getStringExtra(Variablecontain.sender_id)
-        val database = FirebaseDatabase.getInstance().reference
+        val database = FirebaseDatabase.getInstance().getReference("message")
         val current_user = Messege(
             sender_name = user,
             sender_image = user_pic,
@@ -291,7 +291,6 @@ class ChatActivity : AppCompatActivity() {
     ) {
         Thread {
             try {
-
                 val sm = SendMailTask(
                     this@ChatActivity,
                     "abdulrehman4241566@gmail.com",
