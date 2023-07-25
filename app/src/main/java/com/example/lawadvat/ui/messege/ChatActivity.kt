@@ -32,6 +32,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -279,7 +281,7 @@ class ChatActivity : AppCompatActivity() {
             } else {
                 Log.d("TAG", "The interstitial ad wasn't ready yet.")
             }
-            send_Email(email.toString(),
+            send_Email(user_email,
                 msg
             )
         }
@@ -289,7 +291,7 @@ class ChatActivity : AppCompatActivity() {
         Receiver: String,
         Message: String
     ) {
-        Thread {
+        MainScope().launch {
             try {
                 val sm = SendMailTask(
                     this@ChatActivity,
@@ -304,7 +306,10 @@ class ChatActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e("SendMail", e.message, e)
             }
-        }.start()
+        }
+       /* Thread {
+
+        }.start()*/
     }
 
 

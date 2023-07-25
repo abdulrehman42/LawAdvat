@@ -86,7 +86,11 @@ class SearchActivity : AppCompatActivity() {
                     editor.apply()
 
                 }
+                R.id.search_by_city -> {
+                    editor.putString("search_name", "city")
+                    editor.apply()
 
+                }
                 R.id.search_by_email -> {
                     editor.putString("search_name", "email")
                     editor.apply()
@@ -114,11 +118,7 @@ class SearchActivity : AppCompatActivity() {
                     editor.apply()
                 }
 
-                R.id.search_by_city -> {
-                    editor.putString("search_name", "city")
-                    editor.apply()
 
-                }
 
                 R.id.search_by_supreme_id -> {
                     editor.putString("search_name", "supreme_court_id")

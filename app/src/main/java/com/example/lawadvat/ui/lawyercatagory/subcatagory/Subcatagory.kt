@@ -29,7 +29,6 @@ class Subcatagory : AppCompatActivity() {
         val data=intent.getStringExtra(Variablecontain.data)
         val objectList=ArrayList<Requirement?>()
         val databaseReference = FirebaseDatabase.getInstance().getReference("Lawyer")
-        val s="criminal"
         val query: Query = databaseReference.orderByChild(ss).equalTo(data.toString())
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -42,7 +41,82 @@ class Subcatagory : AppCompatActivity() {
                         recyclerview_hire(objectList)
                     }
                 }else{
-                   //in_it("second_specilize")
+                   in_second("second_specilize")
+                   // Toast.makeText(this@Subcatagory,"Lawyer not Available",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun in_second(s: String) {
+        val data=intent.getStringExtra(Variablecontain.data)
+        val objectList=ArrayList<Requirement?>()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Lawyer")
+        val query: Query = databaseReference.orderByChild(s).equalTo(data.toString())
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (datas in dataSnapshot.children) {
+                        //val name = datas.child("name").value.toString()
+                        val requirement: Requirement? = datas.getValue(Requirement::class.java)
+                        //objectList.add(Requirement(name = name))
+                        objectList.add(requirement)
+                        recyclerview_hire(objectList)
+                    }
+                }else{
+                    in_third("third_specilize")
+                   // Toast.makeText(this@Subcatagory,"Lawyer not Available",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun in_third(s: String) {
+        val data=intent.getStringExtra(Variablecontain.data)
+        val objectList=ArrayList<Requirement?>()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Lawyer")
+        val query: Query = databaseReference.orderByChild(s).equalTo(data.toString())
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (datas in dataSnapshot.children) {
+                        //val name = datas.child("name").value.toString()
+                        val requirement: Requirement? = datas.getValue(Requirement::class.java)
+                        //objectList.add(Requirement(name = name))
+                        objectList.add(requirement)
+                        recyclerview_hire(objectList)
+                    }
+                }else{
+                    in_forth("fourth_specilize")
+                   // Toast.makeText(this@Subcatagory,"Lawyer not Available",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun in_forth(s: String) {
+        val data=intent.getStringExtra(Variablecontain.data)
+        val objectList=ArrayList<Requirement?>()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Lawyer")
+        val query: Query = databaseReference.orderByChild(s).equalTo(data.toString())
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (datas in dataSnapshot.children) {
+                        //val name = datas.child("name").value.toString()
+                        val requirement: Requirement? = datas.getValue(Requirement::class.java)
+                        //objectList.add(Requirement(name = name))
+                        objectList.add(requirement)
+                        recyclerview_hire(objectList)
+                    }
+                }else{
+                    //in_forth("second_specilize")
                     Toast.makeText(this@Subcatagory,"Lawyer not Available",Toast.LENGTH_SHORT).show()
                 }
             }
