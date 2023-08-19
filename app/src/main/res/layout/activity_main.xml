@@ -14,7 +14,6 @@
         android:background="?android:attr/windowBackground"
         app:itemIconTint="@color/check_menu"
         app:itemTextColor="@color/check_menu"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

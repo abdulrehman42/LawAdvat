@@ -140,7 +140,7 @@ class ThirdFragment : Fragment() {
         }else if (supreme.length < 6) {
             binding.layoutSupreme.error = "Invalid supreme court license"
         }*/
-        /*else {
+        else {
             array.add(general)
             array.add(high)
             array.add(supreme)
@@ -152,7 +152,7 @@ class ThirdFragment : Fragment() {
                 ?.replace(R.id.nav_host_fragment_activity_main, forthFragment)
                 ?.addToBackStack(null)
                 ?.commit()
-        }*/
+        }
     }
     fun alternative(array:java.util.ArrayList<String>) {
         val n = binding.itemGeneral.text.toString()

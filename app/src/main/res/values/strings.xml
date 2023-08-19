@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LawAdvat</string>
     <string name="title_home">Home</string>
+    <string name="developer">Abdulrehman</string>
     <string name="title_appointment">Appointment</string>
     <string name="title_messege">Messege</string>
     <string name="title_setting">Setting</string>

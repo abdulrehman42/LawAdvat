@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -142,6 +143,7 @@ class SeventhFragmen : Fragment() {
             ?.replace(R.id.nav_host_fragment_activity_main,sixthFragment)?.addToBackStack(null)
             ?.commit()
     }
+    @SuppressLint("SuspiciousIndentation")
     fun alternative(array:java.util.ArrayList<String>) {
         val n = binding.itemName.text.toString()
         val e = binding.itemEmail.text.toString()
@@ -237,6 +239,7 @@ class SeventhFragmen : Fragment() {
                 cnic = array[3], gender = array[4],
                 country = array[5], province = array[6], city = array[7], office_location = array[8], general__id = array[9], high_court_id = array[10], supreme_court_id = array[11], description = array[12], experince = array[13], fee = array[14], first_specilize = array[15], second_specilize = array[16], third_specilize = array[17], fourth_specilize = array[18], llb = array[19], llm = array[20], bar_of_law = array[21], phd = array[22], id = user_id,
                 layer = true))
+            //Toast.makeText(requireContext(),"Your Gig Under review",Toast.LENGTH_LONG).show()
             val msg="Hi $n,\n We would like to express our sincere appreciation for registering as a lawyer with LawAdvat. We are delighted to welcome you to our platform, connecting legal professionals with clients in need of legal expertise.\n" +
                     "\n" +
                     "By joining LawAdvat, you have taken a significant step towards expanding your professional reach and providing your legal services to a wider audience. Our platform offers a seamless and user-friendly experience for both lawyers and clients, facilitating efficient communication and fostering meaningful connections.\n" +

@@ -41,6 +41,10 @@ class Signup : AppCompatActivity() {
            finishAffinity()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
     private fun sign_process() {
         googleoption= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(com.example.lawadvat.R.string.default_web_client_id)).requestEmail().build()

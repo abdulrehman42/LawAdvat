@@ -30,8 +30,8 @@ class Appointment : AppCompatActivity() {
             finish()
         }
         in_it()
-        binding.dayDatePicker.setStartDate(1,6,2023)
-        binding.dayDatePicker.setEndDate(1,6,2050)
+        binding.dayDatePicker.setStartDate(25,7,2023)
+        binding.dayDatePicker.setEndDate(25,7,2050)
         binding.dayDatePicker.getSelectedDate(OnDateSelectedListener { date ->
             if (date != null) {
                 val editor =
